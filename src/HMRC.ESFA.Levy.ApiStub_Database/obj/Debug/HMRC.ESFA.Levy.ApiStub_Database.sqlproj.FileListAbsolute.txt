@@ -1,0 +1,10 @@
+D:\SFA\hmrc-apprenticeship-levy-api-stub\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.dacpac
+D:\SFA\hmrc-apprenticeship-levy-api-stub\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.pdb
+D:\SFA\hmrc-apprenticeship-levy-api-stub\HMRC.ESFA.Levy.ApiStub_Database\obj\Debug\HMRC.ESFA.Levy.ApiStub_Database.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\HMRC.ESFA.Levy.ApiStub_Database\obj\Debug\HMRC.ESFA.Levy.ApiStub_Database.pdb
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.dacpac
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.ApiStub_Database\bin\Debug\HMRC.ESFA.Levy.ApiStub_Database.pdb
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.ApiStub_Database\obj\Debug\HMRC.ESFA.Levy.ApiStub_Database.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.ApiStub_Database\obj\Debug\HMRC.ESFA.Levy.ApiStub_Database.pdb
