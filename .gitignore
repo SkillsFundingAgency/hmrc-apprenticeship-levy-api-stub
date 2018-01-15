@@ -4,3 +4,12 @@
 
 /src/packages
 /src/.vs
+/src/HMRC.ESFA.Levy.ApiStub_Database/bin/Debug/DeploymentReport_1.txt
+/src/HMRC.ESFA.Levy.ApiStub_Database/bin/Debug/HMRC_1.ESFA.Levy.ApiStub_Database.publish.sql
+/src/HMRC.ESFA.Levy.Api.Stub/bin/Dapper.xml
+/src/HMRC.ESFA.Levy.Api.Stub/bin/NLog.xml
+/src/HMRC.ESFA.Levy.Api.Stub/bin/Polly.xml
+/src/HMRC.ESFA.Levy.ApiStub_Database/obj/Debug/Model.xml
+/src/HMRC.ESFA.Levy.ApiStub_Database/obj/Debug/refactor.xml
+/src/HMRC.ESFA.Levy.ApiStub_Database/HMRC.ESFA.Levy.ApiStub_Database.jfm
+/src/HMRC.ESFA.Levy.ApiStub_Database/HMRC.ESFA.Levy.ApiStub_Database.dbmdl

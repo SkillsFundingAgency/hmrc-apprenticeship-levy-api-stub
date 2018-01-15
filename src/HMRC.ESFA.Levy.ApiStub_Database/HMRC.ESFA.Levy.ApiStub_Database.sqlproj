@@ -59,10 +59,12 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="StoredProcedure" />
+    <Folder Include="Schemas" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\ResponseJson.sql" />
-    <Build Include="StoredProcedure\GetResponse.sql" />
+    <Build Include="StoredProcedure\GetEmploymentStatus.sql" />
+    <Build Include="Tables\EmploymentStatus.sql" />
+    <Build Include="Schemas\Schemas.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HMRC.ESFA.Levy.ApiStub_Database.refactorlog" />

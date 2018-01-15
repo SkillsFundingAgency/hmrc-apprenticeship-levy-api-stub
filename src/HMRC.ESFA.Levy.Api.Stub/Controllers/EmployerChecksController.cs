@@ -1,36 +1,38 @@
 ﻿using System;
+using System.Configuration;
+using System.Threading.Tasks;
 using System.Web.Http;
+using HMRC.ESFA.Levy.Api.Stub.Data;
+using HMRC.ESFA.Levy.Api.Stub.StubbedObjects;
 using HMRC.ESFA.Levy.Api.Types;
 
 namespace HMRC.ESFA.Levy.Api.Stub.Controllers
 {
     public class EmployerChecksController : ApiController
     {
-        // GET api/<controller>
-        public EmploymentStatus GetEmploymentStatus(string authToken, string empRef, string nino,
+        private string ConnectionString;
+        private InertLogger Logger;
+        private EmployerChecksRepository Repository;
+
+        public EmployerChecksController()
+        {
+            ConnectionString = ConfigurationManager.AppSettings["DataConnectionString"];
+            Logger = new InertLogger();
+            Repository = new EmployerChecksRepository(ConnectionString, Logger);
+        }
+
+        [HttpGet]
+        public async Task<EmploymentStatus> GetEmploymentStatus(string authToken, string empRef, string nino,
             DateTime? fromDate = null, DateTime? toDate = null)
         {
-            return FetchEmploymentStatus(empRef);
+            return await Repository.GetEmploymentStatus(empRef);
         }
 
-        // GET api/<controller>
-        public EmploymentStatus GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
+        [HttpGet]
+        public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
             DateTime? toDate = null)
         {
-            return FetchEmploymentStatus(empRef);
-
-        }
-
-        private static EmploymentStatus FetchEmploymentStatus(string empRef)
-        {
-            return new EmploymentStatus
-            {
-                Employed = true,
-                Empref = empRef,
-                FromDate = DateTime.MinValue,
-                ToDate = DateTime.MaxValue,
-                Nino = "NinoString"
-            };
+            return await Repository.GetEmploymentStatus(empRef);
         }
     }
 }

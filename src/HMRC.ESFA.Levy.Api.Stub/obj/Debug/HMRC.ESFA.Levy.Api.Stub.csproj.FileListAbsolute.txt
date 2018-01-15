@@ -3,6 +3,7 @@ D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\HMRC.ES
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\HMRC.ESFA.Levy.Api.Stub.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\HMRC.ESFA.Levy.Api.Stub.pdb
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Antlr3.Runtime.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Dapper.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\HMRC.ESFA.Levy.Api.Types.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microsoft.AI.Agent.Intercept.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microsoft.AI.DependencyCollector.dll
@@ -14,6 +15,10 @@ D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microso
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microsoft.Web.Infrastructure.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Newtonsoft.Json.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\NLog.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Polly.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\SFA.DAS.NLog.Logger.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\SFA.DAS.Sql.Client.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Net.Http.Formatting.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.Helpers.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.Http.dll
@@ -25,8 +30,12 @@ D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.WebPages.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.WebPages.Razor.dll
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\WebGrease.dll
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Dapper.xml
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Newtonsoft.Json.xml
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\NLog.xml
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Polly.pdb
+D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\Polly.xml
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Net.Http.Formatting.xml
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.Helpers.xml
 D:\SFA\hmrc-apprenticeship-levy-api-stub\src\HMRC.ESFA.Levy.Api.Stub\bin\System.Web.Http.xml
