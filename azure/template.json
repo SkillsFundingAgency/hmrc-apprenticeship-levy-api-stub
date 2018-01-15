@@ -39,7 +39,7 @@
     },
     "variables": {
         "sqlServerTemplateUrl": "[concat(parameters('templateBaseUrl'), '/sql-server.json')]",
-        "secretName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentname'), '-', parameters('releaseDefinitionName'), '-sql'))]",
+        "secretName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('releaseDefinitionName'), '-', parameters('environmentname'), '-sql'))]",
         "appServicePlanName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-asp'))]",
         "appServiceName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-as'))]",
         "sqlServerName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentname'), '-', parameters('serviceNameAbbrv'), '-sql'))]"
