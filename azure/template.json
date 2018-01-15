@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "templateBaseUrl": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/SkillsFundingAgency/hmrc-apprenticeship-levy-api-stub/master/azure"
+        },
+        "appServicePlanSku": {
+            "type": "object"
+        },
+        "serviceNameAbbrv": {
+            "type": "string"
+        },
+        "appSettings": {
+            "type": "array"
+        },
+        "sqlAdminLogin": {
+            "type": "string"
+        },
+        "environmentName": {
+            "type": "string"
+        },
+        "releaseDefinitionName": {
+            "type": "string"
+        },
+        "vaultName": {
+            "type": "string"
+        },
+        "vaultResourceGroup": {
+            "type": "string"
+        },
+        "vaultSubscriptionId": {
+            "type": "string"
+        },
+        "resourceNamePrefix" : {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "sqlServerTemplateUrl": "[concat(parameters('templateBaseUrl'), '/sql-server.json')]",
+        "secretName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('releaseDefinitionName'), '-', parameters('environmentname'), '-sql'))]",
+        "appServicePlanName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-asp'))]",
+        "appServiceName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-as'))]",
+        "sqlServerName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentname'), '-', parameters('serviceNameAbbrv'), '-sql'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "name": "[variables('appServicePlanName')]",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "sku": "[parameters('appServicePlanSku')]",
+            "properties": {
+                "name": "[variables('appServicePlanName')]"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "name": "[variables('appServiceName')]",
+            "apiVersion": "2016-08-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverFarms/', variables('appServicePlanName'))]"
+            ],
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverFarms', variables('appServicePlanName'))]",
+                "siteConfig": {
+                    "appSettings": "[parameters('appSettings')]",
+                    "alwaysOn": true
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "sql-deployment",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('sqlServerTemplateUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlAdminPassword": {
+                        "reference": {
+                            "keyVault": {
+                                "id": "[resourceId(parameters('vaultSubscriptionId'),  parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                            },
+                            "secretName": "[variables('secretName')]"
+                        }
+                    },
+                    "sqlAdminLogin": {
+                        "value": "[parameters('sqlAdminLogin')]"
+                    },
+                    "sqlServerName": {
+                        "value": "[variables('sqlServerName')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
