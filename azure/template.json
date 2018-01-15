@@ -82,7 +82,7 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "adminPassword": {
+                    "sqlAdminPassword": {
                         "reference": {
                             "keyVault": {
                                 "id": "[resourceId(parameters('vaultSubscriptionId'),  parameters('vaultResourceGroup'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
@@ -90,8 +90,8 @@
                             "secretName": "[variables('secretName')]"
                         }
                     },
-                    "adminLogin": {
-                        "value": "[parameters('adminLogin')]"
+                    "sqlAdminLogin": {
+                        "value": "[parameters('sqlAdminLogin')]"
                     },
                     "sqlServerName": {
                         "value": "[parameters('sqlServerName')]"
