@@ -1,0 +1,45 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "templateBaseUrl": {
+            "value": "https://raw.githubusercontent.com/SkillsFundingAgency/hmrc-apprenticeship-levy-api-stub/master/azure"
+        },
+        "appServicePlanSku": {
+            "value": {
+                "name": "B1",
+                "tier": "Basic",
+                "size": "B1",
+                "family": "B",
+                "capacity": 1
+            }
+        },
+        "serviceNameAbbrv": {
+            "value": ""
+        },
+        "appSettings": {
+            "value": []
+        },
+        "sqlAdminLogin": {
+            "value": ""
+        },
+        "environmentName": {
+            "value": ""
+        },
+        "releaseDefinitionName": {
+            "value": ""
+        },
+        "vaultName": {
+            "value": ""
+        },
+        "vaultResourceGroup": {
+            "value": ""
+        },
+        "vaultSubscriptionId": {
+            "value": ""
+        },
+        "resourceNamePrefix" : {
+            "value" : ""
+        }
+    }
+}
