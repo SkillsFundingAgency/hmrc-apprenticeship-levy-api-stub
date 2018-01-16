@@ -45,7 +45,11 @@ namespace HMRC.ESFA.Levy.Api.Stub.Data
             }
             catch(Exception e)
             {
-                throw;
+                return new EmploymentStatus
+                {
+                    Empref = e.InnerException.Message,
+                    Nino = nino,
+                };
             }
         }
 
