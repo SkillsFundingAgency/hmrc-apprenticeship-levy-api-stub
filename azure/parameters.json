@@ -17,8 +17,8 @@
         "serviceNameAbbrv": {
             "value": ""
         },
-        "appSettings": {
-            "value": []
+        "databaseConnectionString": {
+            "value": ""
         },
         "sqlAdminLogin": {
             "value": ""

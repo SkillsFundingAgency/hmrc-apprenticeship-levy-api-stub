@@ -12,8 +12,8 @@
         "serviceNameAbbrv": {
             "type": "string"
         },
-        "appSettings": {
-            "type": "array"
+        "databaseConnectionString": {
+            "type": "string"
         },
         "sqlAdminLogin": {
             "type": "string"
@@ -33,7 +33,7 @@
         "vaultSubscriptionId": {
             "type": "string"
         },
-        "resourceNamePrefix" : {
+        "resourceNamePrefix": {
             "type": "string"
         }
     },
@@ -42,6 +42,7 @@
         "secretName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('releaseDefinitionName'), '-', parameters('environmentname'), '-sql'))]",
         "appServicePlanName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-asp'))]",
         "appServiceName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentName'), '-',parameters('serviceNameAbbrv'), '-as'))]",
+        "storageAccountName": "[toLower(concat(parameters('resourceNamePrefix'), parameters('environmentname'), parameters('serviceNameAbbrv'), 'str'))]",
         "sqlServerName": "[toLower(concat(parameters('resourceNamePrefix'), '-', parameters('environmentname'), '-', parameters('serviceNameAbbrv'), '-sql'))]"
     },
     "resources": [
@@ -66,7 +67,12 @@
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverFarms', variables('appServicePlanName'))]",
                 "siteConfig": {
-                    "appSettings": "[parameters('appSettings')]",
+                    "appSettings": [
+                        {
+                            "name": "DataConnectionString",
+                            "value": "[parameters('databaseConnectionString')]"
+                        }
+                    ],
                     "alwaysOn": true
                 }
             }
@@ -97,6 +103,15 @@
                         "value": "[variables('sqlServerName')]"
                     }
                 }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "accountType": "Standard_LRS"
             }
         }
     ],
