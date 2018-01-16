@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using HMRC.ESFA.Levy.Api.Stub.Data;
 using HMRC.ESFA.Levy.Api.Stub.StubbedObjects;
@@ -22,17 +23,11 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
         }
 
         [HttpGet]
-        public async Task<EmploymentStatus> GetEmploymentStatus(string authToken, string empRef, string nino,
-            DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            return await Repository.GetEmploymentStatus(empRef);
-        }
-
-        [HttpGet]
+        [Route("apprenticeship-levy/epaye/{empRef}/employed/{nino}")]
         public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
             DateTime? toDate = null)
         {
-            return await Repository.GetEmploymentStatus(empRef);
+            return await Repository.GetEmploymentStatus(empRef, nino, fromDate, toDate);
         }
     }
 }
