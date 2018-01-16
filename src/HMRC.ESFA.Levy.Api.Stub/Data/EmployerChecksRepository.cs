@@ -45,7 +45,7 @@ namespace HMRC.ESFA.Levy.Api.Stub.Data
             }
             catch(Exception e)
             {
-                return null;
+                throw;
             }
         }
 
