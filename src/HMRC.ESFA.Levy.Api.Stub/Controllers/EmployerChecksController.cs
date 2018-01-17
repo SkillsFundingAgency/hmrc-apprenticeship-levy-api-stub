@@ -27,6 +27,8 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
         public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
             DateTime? toDate = null)
         {
+            empRef = HttpUtility.UrlDecode(empRef);
+
             return await Repository.GetEmploymentStatus(empRef, nino, fromDate, toDate);
         }
     }
