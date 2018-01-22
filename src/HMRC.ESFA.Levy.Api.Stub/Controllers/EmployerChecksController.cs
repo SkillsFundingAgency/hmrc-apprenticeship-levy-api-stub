@@ -23,10 +23,13 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
         }
 
         [HttpGet]
-        [Route("apprenticeship-levy/epaye/{empRef}/employed/{nino}")]
-        public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
+        [Route("apprenticeship-levy/epaye/{*parameters}")]
+        public async Task<EmploymentStatus> GetEmploymentStatus(string parameters, DateTime? fromDate = null,
             DateTime? toDate = null)
         {
+            var paramParts = parameters.Split('/');
+            var empRef = paramParts[0] + "/" + paramParts[1];
+            string nino = paramParts[3];
             return await Repository.GetEmploymentStatus(empRef, nino, fromDate, toDate);
         }
     }
