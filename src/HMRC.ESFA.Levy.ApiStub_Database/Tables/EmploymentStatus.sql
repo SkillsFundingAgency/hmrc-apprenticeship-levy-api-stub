@@ -4,5 +4,6 @@
     [Employed] BIT NOT NULL, 
     [Nino] VARCHAR(50) NULL, 
     [FromDate] DATETIME NULL, 
-    [ToDate] DATETIME NULL
+    [ToDate] DATETIME NULL, 
+    [HttpStatusCode] SMALLINT NULL
 )

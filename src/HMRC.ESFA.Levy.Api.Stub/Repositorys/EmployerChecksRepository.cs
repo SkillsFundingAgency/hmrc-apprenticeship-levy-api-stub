@@ -1,59 +1,22 @@
 ﻿using Dapper;
-using HMRC.ESFA.Levy.Api.Types;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Sql.Client;
 using System;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using HMRC.ESFA.Levy.Api.Stub.Models;
+using HMRC.ESFA.Levy.Api.Stub.Repositorys;
 
 namespace HMRC.ESFA.Levy.Api.Stub.Data
 {
-    public class EmployerChecksRepository : BaseRepository
+    public class EmployerChecksRepository : BaseRepository, IEmployerChecksRepository
     {
         public EmployerChecksRepository(string connectionString, ILog logger) : base(connectionString, logger)
         {
         }
 
-        public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null,
-            DateTime? toDate = null)
-        {
-            try
-            {
-                EmploymentStatus result;
-
-                if (fromDate.HasValue)
-                {
-                    result = await GetEmploymentStatusInDateRange(empRef, nino, fromDate, toDate);
-                }
-                else
-                {
-                    result = await GetEmploymentStatus(empRef, nino);
-                }
-
-                if (result==null)
-                {
-                    result = new EmploymentStatus
-                    {
-                        Employed = false,
-                        Empref = empRef,
-                        Nino = nino,
-                    };
-                }
-
-                return result;
-            }
-            catch(Exception e)
-            {
-                return new EmploymentStatus
-                {
-                    Empref = e.InnerException.Message,
-                    Nino = nino,
-                };
-            }
-        }
-
-        public async Task<EmploymentStatus> GetEmploymentStatus(string empRef, string nino)
+        public async Task<EmployerStatusExtended> GetEmploymentStatus(string empRef, string nino)
         {
             var results = await WithConnection(async c =>
             {
@@ -61,7 +24,7 @@ namespace HMRC.ESFA.Levy.Api.Stub.Data
                 parameters.Add("@empRef", empRef, DbType.String);
                 parameters.Add("@nino", nino, DbType.String);
 
-                return await c.QueryAsync<EmploymentStatus>(
+                return await c.QueryAsync<EmployerStatusExtended>(
                     sql: "[employer_info].[GetEmploymentStatus]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
@@ -73,7 +36,7 @@ namespace HMRC.ESFA.Levy.Api.Stub.Data
             return null;
         }
 
-        public async Task<EmploymentStatus> GetEmploymentStatusInDateRange(string empRef, string nino, DateTime? fromDate = null,
+        public async Task<EmployerStatusExtended> GetEmploymentStatusInDateRange(string empRef, string nino, DateTime? fromDate = null,
            DateTime? toDate = null)
         {
             if (!toDate.HasValue)
@@ -89,7 +52,7 @@ namespace HMRC.ESFA.Levy.Api.Stub.Data
                 parameters.Add("@fromDate", fromDate, DbType.DateTime);
                 parameters.Add("@toDate", toDate, DbType.DateTime);
 
-                return await c.QueryAsync<EmploymentStatus>(
+                return await c.QueryAsync<EmployerStatusExtended>(
                     sql: "[employer_info].[GetEmploymentStatusByDate]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);

@@ -9,7 +9,8 @@ SELECT top 1
 	1 as [Employed],	
 	[Nino],	
 	[FromDate],	
-	[ToDate]	
+	[ToDate],
+	[HttpStatusCode]
   FROM [employer_info].[EmploymentStatus]
 	WHERE [EmpRef] = @EmpRef
 	AND [Nino] = @Nino

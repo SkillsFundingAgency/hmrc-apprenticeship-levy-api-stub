@@ -74,6 +74,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -163,17 +165,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\IStubApi.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployerChecksController.cs" />
-    <Compile Include="Data\EmployerChecksRepository.cs" />
+    <Compile Include="Api\StubApi.cs" />
+    <Compile Include="Repositorys\EmployerChecksRepository.cs" />
+    <Compile Include="Repositorys\IEmployerChecksRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployerStatusExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorys\ApiStubRepository.cs" />
     <Compile Include="StubbedObjects\InertLogger.cs" />
   </ItemGroup>
   <ItemGroup>

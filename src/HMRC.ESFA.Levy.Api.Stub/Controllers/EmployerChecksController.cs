@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using HMRC.ESFA.Levy.Api.Stub.Api;
 using HMRC.ESFA.Levy.Api.Stub.Data;
 using HMRC.ESFA.Levy.Api.Stub.StubbedObjects;
 using HMRC.ESFA.Levy.Api.Types;
@@ -11,15 +12,18 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
 {
     public class EmployerChecksController : ApiController
     {
-        private string ConnectionString;
-        private InertLogger Logger;
-        private EmployerChecksRepository Repository;
+        private readonly IStubApi _stubApi;
 
         public EmployerChecksController()
         {
-            ConnectionString = ConfigurationManager.AppSettings["DataConnectionString"];
-            Logger = new InertLogger();
-            Repository = new EmployerChecksRepository(ConnectionString, Logger);
+            var connectionString = ConfigurationManager.AppSettings["DataConnectionString"];
+
+            _stubApi = new StubApi(new EmployerChecksRepository(connectionString, new InertLogger()));
+        }
+
+        public EmployerChecksController(IStubApi stubApi)
+        {
+            _stubApi = stubApi;
         }
 
         [HttpGet]
@@ -29,8 +33,16 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
         {
             var paramParts = parameters.Split('/');
             var empRef = paramParts[0] + "/" + paramParts[1];
-            string nino = paramParts[3];
-            return await Repository.GetEmploymentStatus(empRef, nino, fromDate, toDate);
+            var nino = paramParts[3];
+
+            var result = await _stubApi.GetEmploymentStatus(empRef, nino, fromDate, toDate);
+
+            if (result.HttpStatusCode == null) return result;
+
+            HttpContext.Current.Response.StatusCode = result.HttpStatusCode.Value;
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.Response.End();
+            return null;
         }
     }
 }
