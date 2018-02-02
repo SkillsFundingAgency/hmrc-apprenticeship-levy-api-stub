@@ -31,6 +31,12 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
         public async Task<EmploymentStatus> GetEmploymentStatus(string parameters, DateTime? fromDate = null,
             DateTime? toDate = null)
         {
+            if(fromDate == null || toDate == null)
+            {
+                RespondWithHttpStatus(400);
+                return null;
+            }
+
             var paramParts = parameters.Split('/');
             var empRef = paramParts[0] + "/" + paramParts[1];
             var nino = paramParts[3];
@@ -39,10 +45,15 @@ namespace HMRC.ESFA.Levy.Api.Stub.Controllers
 
             if (result.HttpStatusCode == null) return result;
 
-            HttpContext.Current.Response.StatusCode = result.HttpStatusCode.Value;
+            RespondWithHttpStatus(result.HttpStatusCode.Value);
+            return null;
+        }
+
+        private void RespondWithHttpStatus(int httpStatusCode)
+        {
+            HttpContext.Current.Response.StatusCode = httpStatusCode;
             HttpContext.Current.Response.Flush();
             HttpContext.Current.Response.End();
-            return null;
         }
     }
 }
