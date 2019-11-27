@@ -17,7 +17,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
         public async Task<GetEmployerChecksResponse> Get(GetEmployerChecksRequest request)
         {
-            var result =  await _employerChecksRepository.GetEmploymentStatus(request.EmpRef, request.Nino);
+            var result =  await _employerChecksRepository.GetEmploymentStatus(request.EmpRef, request.Nino, request.FromDate, request.ToDate);
 
             if(result == null)
             {

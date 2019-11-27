@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SFA.DAS.HMRC.API.Stub.Commands;
 using SFA.DAS.HMRC.API.Stub.Data.Contexts;
+using SFA.DAS.HMRC.API.Stub.Data.Repositories;
 using SFA.DAS.HMRC.API.Stub.Repositories;
 
 namespace SFA_DAS_HMRC_API_Stub
@@ -38,6 +39,18 @@ namespace SFA_DAS_HMRC_API_Stub
             services.AddTransient<IEmployerChecksRepository, EmployerChecksRepository>();
             services.AddTransient<IEmployerDataContext, EmployerDataContext>();
             services.AddDbContext<EmployerDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
+            services.AddTransient<GetEmployerReferenceRequest>();
+            services.AddTransient<GetEmployerrReferenceResponse>();
+            services.AddTransient<ICommand<GetEmployerReferenceRequest, GetEmployerrReferenceResponse>, GetEmployerReferenceCommand>();
+            services.AddTransient<IEmployerReferenceRepository, EmployerReferenceRepository>();
+            services.AddTransient<IEmployerReferenceDataContext, EmployerReferenceDataContext>();
+            services.AddDbContext<EmployerReferenceDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
+            services.AddLogging(configure =>
+            {
+                configure.AddConsole();
+            });
         }
 
         private IConfiguration AddConfig()
@@ -46,7 +59,7 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddConfiguration(Configuration)
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appSettings.json")
-                .AddJsonFile("appSettings.local.json", true)
+                .AddJsonFile("appSettings.Development.json", true)
                 .AddEnvironmentVariables()
                 .Build()
             ;

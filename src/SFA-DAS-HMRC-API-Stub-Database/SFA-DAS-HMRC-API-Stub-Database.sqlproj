@@ -62,5 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\EmploymentStatus.sql" />
+    <Build Include="Tables\EmployerReference.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SFA-DAS-HMRC-API-Stub-Database.refactorlog" />
   </ItemGroup>
 </Project>

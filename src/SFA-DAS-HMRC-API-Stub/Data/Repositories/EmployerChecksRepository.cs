@@ -23,28 +23,38 @@ namespace SFA.DAS.HMRC.API.Stub.Repositories
             _logger = logger ?? throw new ArgumentException("logger cannot be null");
         }
 
-        public async Task<EmployerStatus> GetEmploymentStatus(string empRef, string nino)
-        {
-            return await _employerDataContext.EmployerStatus
-                .FirstOrDefaultAsync()
-            ;
-        }
+        //public async Task<EmployerStatus> GetEmploymentStatus(string empRef, string nino)
+        //{
+        //    _logger.LogDebug($"Getting employment status in date range, empRef: {empRef}, nino: {nino}");
 
-        public async Task<EmployerStatus> GetEmploymentStatusInDateRange(
+        //    return await _employerDataContext.EmployerStatus
+        //        .FirstOrDefaultAsync()
+        //    ;
+        //}
+
+        public async Task<EmployerStatus> GetEmploymentStatus(
             string empRef,
             string nino,
             DateTime? fromDate = null,
             DateTime? toDate = null)
         {
-            if (!toDate.HasValue)
+            _logger.LogDebug($"Getting eployent status in date range, empRef: {empRef}, nino: {nino}, fromDate: {fromDate}, toDate: {toDate}");
+
+            if (fromDate.HasValue && !toDate.HasValue)
             {
                 toDate = DateTime.MaxValue;
             }
 
-            return await _employerDataContext.EmployerStatus
-                .Where(es => (es.FromDate.HasValue && es.ToDate.HasValue) && (es.FromDate <= fromDate && es.ToDate < toDate))
-                .FirstOrDefaultAsync()
+            var query = _employerDataContext.EmployerStatus
+                .Where(es => es.EmpRef == empRef && es.Nino == nino)
             ;
+
+            if(fromDate.HasValue && toDate.HasValue)
+            {
+                query = query.Where(es => es.FromDate.Value.Date >= fromDate.Value.Date && es.ToDate.Value.Date < toDate.Value.Date);
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

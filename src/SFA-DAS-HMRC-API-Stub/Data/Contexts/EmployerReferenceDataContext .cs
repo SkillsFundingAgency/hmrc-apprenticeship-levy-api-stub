@@ -4,15 +4,15 @@ using Config = SFA.DAS.HMRC.API.Stub.Data.Configuration;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
 {
-    public class EmployerDataContext : DbContext, IEmployerDataContext
+    public class EmployerReferenceDataContext : DbContext, IEmployerReferenceDataContext
     {
-        public DbSet<EmployerStatus> EmployerStatus { get; set; }        
+        public DbSet<EmployerReference> EmployerReference { get; set; }
 
-        public EmployerDataContext()
+        public EmployerReferenceDataContext()
         {
         }
 
-        public EmployerDataContext(DbContextOptions options) 
+        public EmployerReferenceDataContext(DbContextOptions options) 
             : base(options)
         {
         }
@@ -23,8 +23,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Config.EmployerStatus());
-
+            modelBuilder.ApplyConfiguration(new Config.EmployerReference());
 
             base.OnModelCreating(modelBuilder);
         }
