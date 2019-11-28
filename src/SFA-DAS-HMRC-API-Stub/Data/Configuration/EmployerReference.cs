@@ -13,7 +13,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Configuration
         {
             builder.ToTable("EmployerReference");
             builder.HasKey(x => x.Id);
-
             builder.Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired();
             builder.Property(x => x.EmpRef).HasColumnName(@"EmpRef").HasColumnType("varchar").HasMaxLength(50).IsRequired();
             builder.Property(x => x.Data).HasColumnName(@"Data").HasColumnType("varchar(max)").IsRequired();

@@ -42,9 +42,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
                 return NotFound();
             }
 
-            var jobj = JToken.Parse(result.Data);
-
-            return Ok(jobj);
+            return Ok(JToken.Parse(result.Data));
         }
     }
 }

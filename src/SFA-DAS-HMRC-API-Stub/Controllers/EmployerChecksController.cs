@@ -31,10 +31,10 @@ namespace SFA.DAS.HMRC.API.Stub.Controllers
         {
             _logger.LogDebug("Start GetEmploymentStatus action");
 
-            //if (fromDate == null || toDate == null)
-            //{
-            //    return BadRequest();
-            //}
+            if (fromDate == null || toDate == null)
+            {
+                return BadRequest($"Missing parameter: {(!fromDate.HasValue ? "fromDate" : !toDate.HasValue ? "toDate" : string.Empty)}");
+            }
 
             var result = await _getEmployerChecksCommand.Get(new GetEmployerChecksRequest($"{empRef1}/{empRef2}", nino, fromDate, toDate));
 

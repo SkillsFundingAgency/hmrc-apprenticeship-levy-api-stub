@@ -12,7 +12,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
         {
         }
 
-        public EmployerDataContext(DbContextOptions options) 
+        public EmployerDataContext(DbContextOptions<EmployerDataContext> options) 
             : base(options)
         {
         }

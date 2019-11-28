@@ -12,12 +12,8 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
         {
         }
 
-        public EmployerReferenceDataContext(DbContextOptions options) 
+        public EmployerReferenceDataContext(DbContextOptions<EmployerReferenceDataContext> options) 
             : base(options)
-        {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
 
