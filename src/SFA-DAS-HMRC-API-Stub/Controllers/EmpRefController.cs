@@ -37,6 +37,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
 
             _logger.LogDebug("End GetEmploymentRef action");
 
+
             if (result == null)
             {
                 return NotFound();
