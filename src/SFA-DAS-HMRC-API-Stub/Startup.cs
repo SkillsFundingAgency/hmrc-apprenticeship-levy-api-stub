@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,9 @@ using Microsoft.Extensions.Options;
 using SFA.DAS.HMRC.API.Stub.Commands;
 using SFA.DAS.HMRC.API.Stub.Data.Contexts;
 using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Filters;
 using SFA.DAS.HMRC.API.Stub.Repositories;
+using SFA.DAS.HMRC.API.Stub.Services;
 
 namespace SFA_DAS_HMRC_API_Stub
 {
@@ -31,7 +35,11 @@ namespace SFA_DAS_HMRC_API_Stub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(opts =>
+            {
+                opts.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             var config = AddConfig();
             services.AddTransient<GetEmployerChecksRequest>();
             services.AddTransient<GetEmployerChecksResponse>();
@@ -46,6 +54,23 @@ namespace SFA_DAS_HMRC_API_Stub
             services.AddTransient<IEmployerReferenceRepository, EmployerReferenceRepository>();
             services.AddTransient<IEmployerReferenceDataContext, EmployerReferenceDataContext>();
             services.AddDbContext<EmployerReferenceDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
+            services.AddTransient<IAuthRecordRepository, AuthRecordRepository>();
+            services.AddTransient<IAuthRecordDataContext, AuthRecordDataContext>();
+            services.AddDbContext<AuthRecordDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
+            services.AddTransient<IGatewayRepository, GatewayRepository>();
+            services.AddTransient<IGatewayDataContext, GatewayDataContext>();
+            services.AddDbContext<GatewayDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
+            services.AddTransient<IAuthenticate, AuthenticationService>();
+            services.AddScoped<AuthorisationFilter>();
+            services.AddAuthentication(cfg =>
+            {
+                cfg.DefaultScheme = BearerAuthenticationOptions.DefaultScheme;
+                cfg.DefaultChallengeScheme = BearerAuthenticationOptions.DefaultScheme;
+            })
+            .AddCustomAuth(o => { });
 
             services.AddLogging(configure =>
             {
@@ -78,6 +103,7 @@ namespace SFA_DAS_HMRC_API_Stub
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

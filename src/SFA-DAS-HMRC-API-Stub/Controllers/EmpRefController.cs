@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
@@ -25,6 +26,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _logger = logger;
         }
 
+        [TypeFilter(typeof(AuthorisationFilter))]
         [HttpGet]
         [Route("{empRef1}/{empRef2}")]
         public async Task<IActionResult> GetEmploymentRef(
@@ -43,7 +45,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
                 return NotFound();
             }
 
-            return Ok(JToken.Parse(result.Data));
+            return Ok(JToken.Parse(result.Data));            
         }
     }
 }
