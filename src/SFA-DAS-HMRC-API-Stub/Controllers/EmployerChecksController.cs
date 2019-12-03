@@ -7,6 +7,8 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA.DAS.HMRC.API.Stub.Controllers
 {
+    [TypeFilter(typeof(AuthorisationFilter))]
+    [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmployerChecksController : ControllerBase
     {
@@ -21,9 +23,9 @@ namespace SFA.DAS.HMRC.API.Stub.Controllers
             _logger = logger;
         }
 
-        [TypeFilter(typeof(AuthorisationFilter))]
+       
         [HttpGet]
-        [Route("apprenticeship-levy/epaye/{empRef1}/{empRef2}/employed/{nino}")]
+        [Route("{empRef1}/{empRef2}/employed/{nino}")]
         public async Task<IActionResult> GetEmploymentStatus(
             string empRef1,
             string empRef2,

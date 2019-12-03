@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
+    [TypeFilter(typeof(AuthorisationFilter))]
+    [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class LevyDeclarationController : ControllerBase
     {
@@ -24,8 +27,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         }
 
         [HttpGet]
-        [Route("apprenticeship-levy/epaye/{empRef1}/{empRef2}/employed/{nino}")]
-
+        [Route("{empRef1}/{empRef2}/declarations")]
         public async Task<IActionResult> GetLevyDeclaration()
         {
             _logger.LogDebug("Start GetLevyDeclaration action");

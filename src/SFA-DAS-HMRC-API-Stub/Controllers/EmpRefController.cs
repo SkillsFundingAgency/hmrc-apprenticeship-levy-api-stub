@@ -11,6 +11,7 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
+    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmpRefController : ControllerBase
@@ -25,8 +26,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _getEmployerReference = getEmployerReference;
             _logger = logger;
         }
-
-        [TypeFilter(typeof(AuthorisationFilter))]
+        
         [HttpGet]
         [Route("{empRef1}/{empRef2}")]
         public async Task<IActionResult> GetEmploymentRef(
