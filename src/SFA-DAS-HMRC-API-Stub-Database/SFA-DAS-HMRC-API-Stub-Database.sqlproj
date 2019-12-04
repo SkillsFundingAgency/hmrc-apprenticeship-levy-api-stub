@@ -64,8 +64,13 @@
     <Build Include="Tables\EmploymentStatus.sql" />
     <Build Include="Tables\EmployerReference.sql" />
     <Build Include="Tables\Declarations.sql" />
+    <Build Include="Tables\GatewayUsers.sql" />
+    <Build Include="Tables\AuthRecords.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SFA-DAS-HMRC-API-Stub-Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Seed.sql" />
   </ItemGroup>
 </Project>

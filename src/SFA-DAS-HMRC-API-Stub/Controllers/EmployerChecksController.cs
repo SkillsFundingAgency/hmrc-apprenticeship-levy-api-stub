@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA.DAS.HMRC.API.Stub.Controllers
 {
+    [TypeFilter(typeof(AuthorisationFilter))]
+    [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmployerChecksController : ControllerBase
     {
@@ -20,8 +23,9 @@ namespace SFA.DAS.HMRC.API.Stub.Controllers
             _logger = logger;
         }
 
+       
         [HttpGet]
-        [Route("apprenticeship-levy/epaye/{empRef1}/{empRef2}/employed/{nino}")]
+        [Route("{empRef1}/{empRef2}/employed/{nino}")]
         public async Task<IActionResult> GetEmploymentStatus(
             string empRef1,
             string empRef2,
@@ -33,7 +37,9 @@ namespace SFA.DAS.HMRC.API.Stub.Controllers
 
             if (fromDate == null || toDate == null)
             {
+#pragma warning disable S3358 // Ternary operators should not be nested
                 return BadRequest($"Missing parameter: {(!fromDate.HasValue ? "fromDate" : !toDate.HasValue ? "toDate" : string.Empty)}");
+#pragma warning restore S3358 // Ternary operators should not be nested
             }
 
             var result = await _getEmployerChecksCommand.Get(new GetEmployerChecksRequest($"{empRef1}/{empRef2}", nino, fromDate, toDate));
