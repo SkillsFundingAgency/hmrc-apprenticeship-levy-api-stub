@@ -6,7 +6,6 @@ namespace SFA.DAS.HMRC.API.Stub.Repositories
 {
     public interface IEmployerChecksRepository
     {
-       // Task<EmployerStatus> GetEmploymentStatus(string empRef, string nino);
         Task<EmployerStatus> GetEmploymentStatus(
             string empRef,
             string nino,

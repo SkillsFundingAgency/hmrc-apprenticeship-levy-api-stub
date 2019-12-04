@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
+    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmpRefController : ControllerBase
@@ -24,7 +26,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _getEmployerReference = getEmployerReference;
             _logger = logger;
         }
-
+        
         [HttpGet]
         [Route("{empRef1}/{empRef2}")]
         public async Task<IActionResult> GetEmploymentRef(
@@ -37,12 +39,13 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
 
             _logger.LogDebug("End GetEmploymentRef action");
 
+
             if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(JToken.Parse(result.Data));
+            return Ok(JToken.Parse(result.Data));            
         }
     }
 }
