@@ -63,6 +63,7 @@
   <ItemGroup>
     <Build Include="Tables\EmploymentStatus.sql" />
     <Build Include="Tables\EmployerReference.sql" />
+    <Build Include="Tables\Declarations.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SFA-DAS-HMRC-API-Stub-Database.refactorlog" />

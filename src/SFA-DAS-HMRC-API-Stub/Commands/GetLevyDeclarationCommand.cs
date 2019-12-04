@@ -1,4 +1,5 @@
 ﻿using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,22 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
         public GetLevyDeclarationCommand(ILevyDeclarationRepository levyDeclarationRepository)
         {
-            _levyDeclarationRepository = levyDeclarationRepository ?? throw new ArgumentException("LevyDeclaration cannot be null");
-
+            _levyDeclarationRepository = levyDeclarationRepository ?? throw new ArgumentException("LevyDeclarationRepository cannot be null");
         }
 
-        public Task<GetLevyDeclarationResponse> Get(GetLevyDeclarationRequest request)
+        public async Task<GetLevyDeclarationResponse> Get(GetLevyDeclarationRequest request)
         {
-            throw new NotImplementedException();
+            var result = await _levyDeclarationRepository.GetByEmpRef(request.EmpRef, request.FromDate, request.ToDate);
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            var retVal = new GetLevyDeclarationResponse();
+            retVal.Declarations = result;
+
+            return retVal;
         }
     }
 }

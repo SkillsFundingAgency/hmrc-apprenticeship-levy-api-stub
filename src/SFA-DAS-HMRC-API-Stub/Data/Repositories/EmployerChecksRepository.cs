@@ -29,7 +29,7 @@ namespace SFA.DAS.HMRC.API.Stub.Repositories
             DateTime? fromDate = null,
             DateTime? toDate = null)
         {
-            _logger.LogDebug($"Getting eployent status in date range, empRef: {empRef}, nino: {nino}, fromDate: {fromDate}, toDate: {toDate}");
+            _logger.LogDebug($"Getting employment status in date range, empRef: {empRef}, nino: {nino}, fromDate: {fromDate}, toDate: {toDate}");
 
             var query = _employerDataContext.EmployerStatus
                 .Where(es => es.EmpRef == empRef && es.Nino == nino)

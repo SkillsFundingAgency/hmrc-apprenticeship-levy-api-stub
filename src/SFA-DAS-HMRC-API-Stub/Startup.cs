@@ -47,6 +47,13 @@ namespace SFA_DAS_HMRC_API_Stub
             services.AddTransient<IEmployerReferenceDataContext, EmployerReferenceDataContext>();
             services.AddDbContext<EmployerReferenceDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
 
+            services.AddTransient<GetLevyDeclarationRequest>();
+            services.AddTransient<GetLevyDeclarationResponse>();
+            services.AddTransient<ICommand<GetLevyDeclarationRequest, GetLevyDeclarationResponse>, GetLevyDeclarationCommand>();
+            services.AddTransient<ILevyDeclarationRepository, LevyDeclarationRepository>();
+            services.AddTransient<ILevyDeclarationDataContext, LevyDeclarationDataContext>();
+            services.AddDbContext<LevyDeclarationDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+
             services.AddLogging(configure =>
             {
                 configure.AddConsole();
