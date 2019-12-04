@@ -20,11 +20,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
         {
         }
 
-
-
     }
-
-
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)
     //{

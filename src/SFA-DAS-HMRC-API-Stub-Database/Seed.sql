@@ -71,4 +71,13 @@ INSERT INTO [dbo].[AuthRecords]
            ,3600
 GO
 
+INSERT INTO [dbo].[Declarations]
+           ([EmpRef]
+           ,[SubmissionTime]
+           ,[Data])
 
+     SELECT 
+			'001/DGB00001'
+           ,'2001-01-01'
+           ,'{"empref":"001/DGB00001","declarations":[{"id":22200000101,"submissionTime":"2017-05-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":1},"levyDueYTD":10000,"levyAllowanceForFullYear":15000},{"id":22200000102,"submissionTime":"2017-06-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":2},"levyDueYTD":20000,"levyAllowanceForFullYear":15000},{"id":22200000103,"submissionTime":"2017-07-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":3},"levyDueYTD":18750,"levyAllowanceForFullYear":15000},{"id":22200000104,"submissionTime":"2017-08-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":4},"levyDueYTD":28750,"levyAllowanceForFullYear":15000},{"id":22200000105,"submissionTime":"2017-09-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":5},"levyDueYTD":38750,"levyAllowanceForFullYear":15000},{"id":22200000106,"submissionTime":"2017-10-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":6},"levyDueYTD":48750,"levyAllowanceForFullYear":15000},{"id":22200000107,"submissionTime":"2017-11-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":7},"levyDueYTD":58750,"levyAllowanceForFullYear":15000},{"id":22200000108,"submissionTime":"2017-12-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":8},"levyDueYTD":68750,"levyAllowanceForFullYear":15000},{"id":22200000109,"submissionTime":"2018-01-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":9},"levyDueYTD":67500,"levyAllowanceForFullYear":15000},{"id":22200000110,"submissionTime":"2018-02-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":10},"levyDueYTD":77500,"levyAllowanceForFullYear":15000},{"id":22200000111,"submissionTime":"2018-03-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":11},"levyDueYTD":87500,"levyAllowanceForFullYear":15000},{"id":22200000112,"submissionTime":"2018-04-15T12:00:00.000","payrollPeriod":{"year":"17-18","month":12},"levyDueYTD":97500,"levyAllowanceForFullYear":15000}]}'
+GO
