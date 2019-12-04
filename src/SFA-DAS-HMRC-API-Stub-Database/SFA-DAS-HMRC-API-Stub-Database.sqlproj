@@ -69,4 +69,7 @@
   <ItemGroup>
     <RefactorLog Include="SFA-DAS-HMRC-API-Stub-Database.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Seed.sql" />
+  </ItemGroup>
 </Project>
