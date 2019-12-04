@@ -18,21 +18,7 @@ INSERT INTO [dbo].[EmployerReference]
            ,[Data])
      VALUES
            ('001/DGB00001'
-           ,'
-    "_links": {
-        "self": {
-            "href": "/epaye/001%2DGB00001"
-        },
-        "declarations": {
-            "href": "/epaye/001%2DGB00001/declarations"
-        },
-        "fractions": {
-            "href": "/epaye/001%2DGB00001/fractions"
-        },
-        "employment-check": {
-            "href": "/epaye/001%2DGB00001/employed"
-        }
-    }')
+           ,'{"_links":{"self":{"href":"/epaye/001%2DGB00001"},"declarations":{"href":"/epaye/001%2DGB00001/declarations"},"fractions":{"href":"/epaye/001%2DGB00001/fractions"},"employment-check":{"href":"/epaye/001%2DGB00001/employed"}},"empref":"001/DGB00001","employer":{"name":{"nameLine1":"DGB1"}}}')
 GO
 
 
