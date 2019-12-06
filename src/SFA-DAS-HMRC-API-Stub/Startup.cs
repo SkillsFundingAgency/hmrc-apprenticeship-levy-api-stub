@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Configuration;
+using SFA.DAS.HMRC.API.Stub.Infrastructure;
 
 namespace SFA_DAS_HMRC_API_Stub
 {
@@ -51,6 +52,11 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddJsonFile("appSettings.json")
                 .AddJsonFile("appSettings.Development.json", true)
                 .AddEnvironmentVariables()
+                .AddAzureTableStorageConfiguration(
+                    Configuration["ConfigurationStorageConnectionString"],
+                    Configuration["AppName"],
+                    Configuration["EnvironmentName"],
+                    "1.0", "SFA.DAS.HmrcApprenticeshipLevyApiStub")
                 .Build()
             ;
         }
