@@ -29,7 +29,9 @@ namespace SFA_DAS_HMRC_API_Stub
                 opts.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var config = AddConfig();
+            var config = new ConfigurationBuilder()
+                .AddConfig(Configuration);
+
             services
                 .AddEmployerChecks(config)
                 .AddEmployerReference(config)
@@ -42,23 +44,6 @@ namespace SFA_DAS_HMRC_API_Stub
             {
                 configure.AddConsole();
             });
-        }
-
-        private IConfiguration AddConfig()
-        {
-            return new ConfigurationBuilder()
-                .AddConfiguration(Configuration)
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json")
-                .AddJsonFile("appSettings.Development.json", true)
-                .AddEnvironmentVariables()
-                .AddAzureTableStorageConfiguration(
-                    Configuration["ConfigurationStorageConnectionString"],
-                    Configuration["AppName"],
-                    Configuration["EnvironmentName"],
-                    "1.0", "SFA.DAS.HmrcApprenticeshipLevyApiStub")
-                .Build()
-            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
