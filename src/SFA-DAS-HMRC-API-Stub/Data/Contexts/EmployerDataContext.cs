@@ -25,7 +25,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Contexts
         {
             modelBuilder.ApplyConfiguration(new Config.EmployerStatus());
 
-
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -34,8 +34,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
                 .Where(ld => ld.EmpRef == empRef)
                 .Where(ld => ld.SubmissionTime.Date >= fromDate.Date && ld.SubmissionTime.Date < toDate.Date)
                 .FirstOrDefaultAsync()
-                ;
-
+            ;
         }
     }
 }
