@@ -26,8 +26,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
             return new GetEmployerrReferenceResponse
             {
-                EmpRef = result.EmpRef,
-                Data = result.Data
+                EmployerReference = result
             };
         }
     }

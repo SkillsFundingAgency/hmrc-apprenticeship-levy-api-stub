@@ -11,24 +11,21 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
-    public class EmployerChecksCosmosRepository : IEmployerChecksRepository
+    public class EmployerChecksCosmosRepository : BaseCosmosRepository, IEmployerChecksRepository
     {
-        private readonly DocumentClient _client;
         private readonly ILogger<EmployerChecksCosmosRepository> _logger;
-        private readonly Uri _collectionUri;
 
         public EmployerChecksCosmosRepository(DocumentClient client, ILogger<EmployerChecksCosmosRepository> logger, Uri collectionUri)
+            : base(client, collectionUri)
         {
-            _client = client;
-            _logger = logger;
-            _collectionUri = collectionUri;
+            _logger = logger ?? throw new ArgumentException("logger cannot be null"); 
         }
 
         public async Task<EmployerStatus> GetEmploymentStatus(string empRef, string nino, DateTime? fromDate = null, DateTime? toDate = null)
         {
             _logger.LogDebug($"Getting employment status in date range, empRef: {empRef}, nino: {nino}, fromDate: {fromDate}, toDate: {toDate}");
 
-            var query = _client.CreateDocumentQuery<EmployerStatus>(_collectionUri, new FeedOptions() { MaxItemCount = 1 })
+            var query = Client.CreateDocumentQuery<EmployerStatus>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
                .Where(es => es.EmpRef == empRef && es.Nino == nino)
                .Where(es => fromDate.Value.Date >= es.FromDate && toDate.Value.Date < es.ToDate)
             ;

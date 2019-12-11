@@ -22,7 +22,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             {
                 var client = o.GetRequiredService<DocumentClient>();
                 var logger = o.GetRequiredService<ILogger<EmployerChecksCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), "employment-status");
+                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.EMPLOYMENTSTATUS);
 
                 return new EmployerChecksCosmosRepository(client, logger, collectionUri);
             });

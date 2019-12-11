@@ -45,7 +45,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
                 return NotFound();
             }
 
-            return Ok(JToken.Parse(result.Data));            
+            return Ok(result.EmployerReference);
         }
     }
 }

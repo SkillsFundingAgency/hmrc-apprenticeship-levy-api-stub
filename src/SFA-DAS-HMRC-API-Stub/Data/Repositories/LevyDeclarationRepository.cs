@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
-    public class LevyDeclarationRepository : ILevyDeclarationRepository
+    public class LevyDeclarationRepository //: ILevyDeclarationRepository
     {
         private readonly ILevyDeclarationDataContext _levyDeclarationDataContext;
         private readonly ILogger<LevyDeclarationRepository> _logger;
@@ -28,13 +28,14 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
             DateTime fromDate,
             DateTime toDate)
         {
-            _logger.LogDebug($"Getting levy declaration by, fromDate: {fromDate}, toDate: {toDate}, empRef: {empRef}");
+            throw new NotImplementedException();
+            //_logger.LogDebug($"Getting levy declaration by, fromDate: {fromDate}, toDate: {toDate}, empRef: {empRef}");
 
-            return await _levyDeclarationDataContext.Declarations
-                .Where(ld => ld.EmpRef == empRef)
-                .Where(ld => ld.SubmissionTime.Date >= fromDate.Date && ld.SubmissionTime.Date < toDate.Date)
-                .FirstOrDefaultAsync()
-            ;
+            //return await _levyDeclarationDataContext.Declarations
+            //    .Where(ld => ld.EmpRef == empRef)
+            //    .Where(ld => ld.SubmissionTime.Date >= fromDate.Date && ld.SubmissionTime.Date < toDate.Date)
+            //    .FirstOrDefaultAsync()
+            //;
         }
     }
 }

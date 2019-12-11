@@ -19,7 +19,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             {
                 var client = o.GetRequiredService<DocumentClient>();
                 var logger = o.GetRequiredService<ILogger<AuthRecordCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), "auth-records");
+                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.AUTHRECORDS);
 
                 return new AuthRecordCosmosRepository(client, logger, collectionUri);
             });

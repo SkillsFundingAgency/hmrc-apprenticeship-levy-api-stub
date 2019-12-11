@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents.Client;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Data.Contexts;
 using SFA.DAS.HMRC.API.Stub.Domain;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
-    public class AuthRecordCosmosRepository : IAuthRecordRepository
+    public class AuthRecordCosmosRepository : BaseCosmosRepository, IAuthRecordRepository
     {
-        private readonly DocumentClient _client;
         private readonly ILogger<AuthRecordCosmosRepository> _logger;
-        private readonly Uri _collectionUri;
 
         public AuthRecordCosmosRepository(DocumentClient client, ILogger<AuthRecordCosmosRepository> logger, Uri collectionUri)
+            :base(client, collectionUri)
         {
-            _client = client;
-            _logger = logger;
-            _collectionUri = collectionUri;
+            _logger = logger ?? throw new ArgumentException("logger cannot be null");
         }
 
         public async Task<IEnumerable<AuthRecord>> GetAuthRecords(string token)
         {
             _logger.LogDebug($"Getting auth records, empRef: {token}");
 
-            var query = _client.CreateDocumentQuery<AuthRecord>(_collectionUri)
+            var query = Client.CreateDocumentQuery<AuthRecord>(CollectionUri)
                .Where(auth => auth.AccessToken == token)
                .ToList()
             ;
