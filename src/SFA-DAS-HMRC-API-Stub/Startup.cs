@@ -1,19 +1,22 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Configuration;
-using SFA.DAS.HMRC.API.Stub.Infrastructure;
+using System;
 
 namespace SFA_DAS_HMRC_API_Stub
 {
     public class Startup
     {
+        private DocumentClient _client;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,6 +34,14 @@ namespace SFA_DAS_HMRC_API_Stub
 
             var config = new ConfigurationBuilder()
                 .AddConfig(Configuration);
+
+            _client = new DocumentClient(new Uri(config.GetValue<string>("cosmosValues:endpointUrl")), config.GetValue<string>("cosmosValues:authKey"), new ConnectionPolicy() { ConnectionMode = ConnectionMode.Gateway, ConnectionProtocol = Protocol.Https });
+            _client.CreateDatabaseIfNotExistsAsync(new Database { Id = config.GetValue<string>("cosmosValues:databaseName") }).Wait();
+
+            services.AddSingleton<DocumentClient>(o =>
+            {
+                return _client;
+            });
 
             services
                 .AddEmployerChecks(config)
