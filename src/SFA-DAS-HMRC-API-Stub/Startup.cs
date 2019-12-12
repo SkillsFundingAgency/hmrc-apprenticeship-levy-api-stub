@@ -10,6 +10,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Configuration;
 using System;
+using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
+using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Data.Contexts;
+using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Filters;
+using SFA.DAS.HMRC.API.Stub.Infrastructure;
+using SFA.DAS.HMRC.API.Stub.Repositories;
+using SFA.DAS.HMRC.API.Stub.Services;
+
 
 namespace SFA_DAS_HMRC_API_Stub
 {
@@ -51,9 +61,17 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddGatewayUsers(config)
             ;
 
-            services.AddLogging(configure =>
+            var nLogConfiguration = new NLogConfiguration();
+            services.AddLogging(options =>
             {
-                configure.AddConsole();
+                options.AddNLog(new NLogProviderOptions
+                {
+                    CaptureMessageTemplates = true,
+                    CaptureMessageProperties = true
+                });
+                options.AddConsole();
+
+                nLogConfiguration.ConfigureNLog(config);
             });
         }
 
