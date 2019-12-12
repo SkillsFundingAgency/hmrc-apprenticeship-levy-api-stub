@@ -8,6 +8,6 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 {
     public class GetLevyDeclarationResponse
     {
-        public Declaration Declarations { get; set; }
+        public LevyDeclaration Declarations { get; set; }
     }
 }

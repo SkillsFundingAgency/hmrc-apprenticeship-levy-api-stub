@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA-DAS-HMRC-API-Stub", "SFA-DAS-HMRC-API-Stub\SFA-DAS-HMRC-API-Stub.csproj", "{79C9D55B-7224-476A-B0FB-EB5BB5E6629F}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SFA-DAS-HMRC-API-Stub-Database", "SFA-DAS-HMRC-API-Stub-Database\SFA-DAS-HMRC-API-Stub-Database.sqlproj", "{2E4858C3-88E1-4C4B-AB4B-BB4955448373}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +15,6 @@ Global
 		{79C9D55B-7224-476A-B0FB-EB5BB5E6629F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C9D55B-7224-476A-B0FB-EB5BB5E6629F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C9D55B-7224-476A-B0FB-EB5BB5E6629F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E4858C3-88E1-4C4B-AB4B-BB4955448373}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

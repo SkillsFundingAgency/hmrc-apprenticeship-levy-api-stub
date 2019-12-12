@@ -8,7 +8,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
     public interface ILevyDeclarationRepository
     {
-        Task<Declaration> GetByEmpRef(
+        Task<LevyDeclaration> GetByEmpRef(
             string empRef,
             DateTime fromDate,
             DateTime toDate)

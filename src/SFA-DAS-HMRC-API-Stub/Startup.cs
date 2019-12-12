@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using SFA.DAS.HMRC.API.Stub.Commands;
-using SFA.DAS.HMRC.API.Stub.Data.Contexts;
-using SFA.DAS.HMRC.API.Stub.Data.Repositories;
-using SFA.DAS.HMRC.API.Stub.Filters;
-using SFA.DAS.HMRC.API.Stub.Repositories;
-using SFA.DAS.HMRC.API.Stub.Services;
+using SFA.DAS.HMRC.API.Stub.Configuration;
+using System;
 
 namespace SFA_DAS_HMRC_API_Stub
 {
     public class Startup
     {
+        private DocumentClient _client;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,62 +32,29 @@ namespace SFA_DAS_HMRC_API_Stub
                 opts.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var config = AddConfig();
-            services.AddTransient<GetEmployerChecksRequest>();
-            services.AddTransient<GetEmployerChecksResponse>();
-            services.AddTransient<ICommand<GetEmployerChecksRequest, GetEmployerChecksResponse>, GetEmployerChecksCommand>();
-            services.AddTransient<IEmployerChecksRepository, EmployerChecksRepository>();
-            services.AddTransient<IEmployerDataContext, EmployerDataContext>();
-            services.AddDbContext<EmployerDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+            var config = new ConfigurationBuilder()
+                .AddConfig(Configuration);
 
-            services.AddTransient<GetEmployerReferenceRequest>();
-            services.AddTransient<GetEmployerrReferenceResponse>();
-            services.AddTransient<ICommand<GetEmployerReferenceRequest, GetEmployerrReferenceResponse>, GetEmployerReferenceCommand>();
-            services.AddTransient<IEmployerReferenceRepository, EmployerReferenceRepository>();
-            services.AddTransient<IEmployerReferenceDataContext, EmployerReferenceDataContext>();
-            services.AddDbContext<EmployerReferenceDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
+            _client = new DocumentClient(new Uri(config.GetValue<string>("cosmosValues:endpointUrl")), config.GetValue<string>("cosmosValues:authKey"), new ConnectionPolicy() { ConnectionMode = ConnectionMode.Gateway, ConnectionProtocol = Protocol.Https });
+            _client.CreateDatabaseIfNotExistsAsync(new Database { Id = config.GetValue<string>("cosmosValues:databaseName") }).Wait();
 
-            services.AddTransient<GetLevyDeclarationRequest>();
-            services.AddTransient<GetLevyDeclarationResponse>();
-            services.AddTransient<ICommand<GetLevyDeclarationRequest, GetLevyDeclarationResponse>, GetLevyDeclarationCommand>();
-            services.AddTransient<ILevyDeclarationRepository, LevyDeclarationRepository>();
-            services.AddTransient<ILevyDeclarationDataContext, LevyDeclarationDataContext>();
-            services.AddDbContext<LevyDeclarationDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
-
-            services.AddTransient<IAuthRecordRepository, AuthRecordRepository>();
-            services.AddTransient<IAuthRecordDataContext, AuthRecordDataContext>();
-            services.AddDbContext<AuthRecordDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
-
-            services.AddTransient<IGatewayRepository, GatewayRepository>();
-            services.AddTransient<IGatewayDataContext, GatewayDataContext>();
-            services.AddDbContext<GatewayDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
-
-
-            services.AddTransient<IAuthenticate, AuthenticationService>();
-            services.AddScoped<AuthorisationFilter>();
-            services.AddAuthentication(cfg =>
+            services.AddSingleton<DocumentClient>(o =>
             {
-                cfg.DefaultScheme = BearerAuthenticationOptions.DefaultScheme;
-                cfg.DefaultChallengeScheme = BearerAuthenticationOptions.DefaultScheme;
-            })
-            .AddCustomAuth(o => { });
+                return _client;
+            });
+
+            services
+                .AddEmployerChecks(config)
+                .AddEmployerReference(config)
+                .AddLevyDeclaration(config)
+                .AddAuthentication(config)
+                .AddGatewayUsers(config)
+            ;
 
             services.AddLogging(configure =>
             {
                 configure.AddConsole();
             });
-        }
-
-        private IConfiguration AddConfig()
-        {
-            return new ConfigurationBuilder()
-                .AddConfiguration(Configuration)
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json")
-                .AddJsonFile("appSettings.Development.json", true)
-                .AddEnvironmentVariables()
-                .Build()
-            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
