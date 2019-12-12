@@ -13,11 +13,7 @@ using System;
 using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Commands;
-using SFA.DAS.HMRC.API.Stub.Data.Contexts;
-using SFA.DAS.HMRC.API.Stub.Data.Repositories;
-using SFA.DAS.HMRC.API.Stub.Filters;
 using SFA.DAS.HMRC.API.Stub.Infrastructure;
-using SFA.DAS.HMRC.API.Stub.Repositories;
 using SFA.DAS.HMRC.API.Stub.Services;
 
 
