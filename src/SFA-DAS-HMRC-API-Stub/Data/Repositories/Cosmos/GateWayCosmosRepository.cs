@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents.Client;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Data.Contexts;
 using SFA.DAS.HMRC.API.Stub.Domain;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Repositories

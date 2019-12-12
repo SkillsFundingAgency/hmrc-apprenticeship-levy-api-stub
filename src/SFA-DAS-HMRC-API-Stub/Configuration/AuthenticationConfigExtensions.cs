@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
-using SFA.DAS.HMRC.API.Stub.Data.Contexts;
 using SFA.DAS.HMRC.API.Stub.Data.Repositories;
 using SFA.DAS.HMRC.API.Stub.Filters;
 using SFA.DAS.HMRC.API.Stub.Services;
@@ -23,9 +21,6 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
 
                 return new AuthRecordCosmosRepository(client, logger, collectionUri);
             });
-
-            services.AddTransient<IAuthRecordDataContext, AuthRecordDataContext>();
-            services.AddDbContext<AuthRecordDataContext>(options => options.UseSqlServer(config.GetConnectionString("default")));
 
             services.AddTransient<IAuthenticate, AuthenticationService>();
             services.AddScoped<AuthorisationFilter>();
