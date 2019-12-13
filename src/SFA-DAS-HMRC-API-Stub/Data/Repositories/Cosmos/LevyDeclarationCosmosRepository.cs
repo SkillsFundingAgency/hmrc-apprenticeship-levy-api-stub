@@ -22,15 +22,23 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 
         public async Task<LevyDeclaration> GetByEmpRef(
              string empRef,
-             DateTime fromDate,
-             DateTime toDate)
+             DateTime? fromDate,
+             DateTime? toDate)
         {
             _logger.LogDebug($"Getting levy declaration by, fromDate: {fromDate}, toDate: {toDate}, empRef: {empRef}");
 
             var declarations = Client.CreateDocumentQuery<LevyDeclaration>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
                 .Where(ld => ld.EmpRef == empRef)
                 .AsEnumerable()
-                .SelectMany(ld => ld.Declarations.Where(d => d.SubmissionTime.Date >= fromDate.Date && d.SubmissionTime.Date < toDate.Date))
+                .SelectMany(ld =>
+                {
+                    if (fromDate.HasValue && toDate.HasValue)
+                    {
+                        return ld.Declarations.Where(d => d.SubmissionTime.Date >= fromDate.Value.Date && d.SubmissionTime.Date < toDate.Value.Date);
+                    }
+
+                    return ld.Declarations;
+                })
             ;
 
             return new LevyDeclaration()

@@ -20,7 +20,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
         {
             var result = await _levyDeclarationRepository.GetByEmpRef(request.EmpRef, request.FromDate, request.ToDate);
 
-            if (result == null)
+            if (result == null || !result.Declarations.Any())
             {
                 return null;
             }

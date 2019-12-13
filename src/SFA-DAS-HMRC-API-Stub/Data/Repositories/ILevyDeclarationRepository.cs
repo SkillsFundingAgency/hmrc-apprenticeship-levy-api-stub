@@ -10,8 +10,8 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
     {
         Task<LevyDeclaration> GetByEmpRef(
             string empRef,
-            DateTime fromDate,
-            DateTime toDate)
+            DateTime? fromDate,
+            DateTime? toDate)
         ;
     }
 }
