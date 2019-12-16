@@ -29,7 +29,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [JsonProperty(PropertyName = "href")]
         public string Href { get; set; }
     }
-
+    
     public class Fractions
     {
         [JsonProperty(PropertyName = "href")]
