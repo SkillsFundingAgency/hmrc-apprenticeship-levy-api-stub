@@ -26,5 +26,23 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
 
             return services;
         }
+
+        public static IServiceCollection AddFractionCalcDate(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddTransient<GetFractionCalcDateRequest>();
+            services.AddTransient<GetFractionCalcDateResponse>();
+            services.AddTransient<ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse>, GetFractionCalcDateCommand>();
+
+            services.AddTransient<IFractionsRepository, FractionsCosmosRepository>(o =>
+            {
+                var client = o.GetRequiredService<DocumentClient>();
+                var logger = o.GetRequiredService<ILogger<FractionsCosmosRepository>>();
+                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.FRACTIONCALCDATE);
+
+                return new FractionsCosmosRepository(client, logger, collectionUri);
+            });
+
+            return services;
+        }
     }
 }

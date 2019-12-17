@@ -54,7 +54,7 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddEmployerReference(config)
                 .AddLevyDeclaration(config)
                 .AddFractions(config)
-                .FractionCalDate(config)
+                .AddFractionCalcDate(config)
                 .AddAuthentication(config)
                 .AddGatewayUsers(config)
             ;

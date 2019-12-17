@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Commands
 {
-    public class GetFractionCalDateResponse
+    public class GetFractionCalcDateResponse
     {
         public FractionCalculationDate LastCalculationDate { get; set; }
     }

@@ -13,33 +13,33 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
     public class FractionsController : ControllerBase
     {
         private readonly ICommand<GetFractionsRequest, GetFractionsResponse> _getFractionsCommand;
-        private readonly ICommand<GetFractionCalDateRequest, GetFractionCalDateResponse> _getFractionsCalDateCommand;
+        private readonly ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse> _getFractionsCalcDateCommand;
         private readonly ILogger<FractionsController> _logger;
 
 
         public FractionsController(
             ICommand<GetFractionsRequest, GetFractionsResponse> getFractionsCommand,
-            ICommand<GetFractionCalDateRequest, GetFractionCalDateResponse> getFractionCalDateCommand,
+            ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse> getFractionCalcDateCommand,
             ILogger<FractionsController> logger)
         {
             _getFractionsCommand = getFractionsCommand;
-            _getFractionsCalDateCommand = getFractionCalDateCommand;
+            _getFractionsCalcDateCommand = getFractionCalcDateCommand;
             _logger = logger;
         }
 
         [HttpGet]
         [Route("{empRef1}/{empRef2}/fractions")]
-        public async Task<IActionResult> GetFractionsData(
+        public async Task<IActionResult> GetFractions(
             string empRef1,
             string empRef2,
             DateTime fromDate,
             DateTime toDate)
         {
-            _logger.LogDebug("Start FractionsData action");
+            _logger.LogDebug("Start GetFractions action");
 
             var result = await _getFractionsCommand.Get(new GetFractionsRequest($"{empRef1}/{empRef2}", fromDate, toDate));
 
-            _logger.LogDebug("End FractionsData action");
+            _logger.LogDebug("End GetFractions action");
 
             if (result == null)
             {
@@ -50,15 +50,14 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         }
 
         [HttpGet]
-        [Route("{empRef1}/{empRef2}/fractions-calculation-date")]
-        public async Task<IActionResult> GetFractionCalculationDate(
-            DateTime lastCalculationDate)
+        [Route("fractions-calculation-date")]
+        public async Task<IActionResult> GetFractionCalculationDate()
         {
-            _logger.LogDebug("start fractionCalculationDate action");
+            _logger.LogDebug("start GetFractionCalculationDate action");
 
-            var result = await _getFractionsCalDateCommand.Get(new GetFractionCalDateRequest(lastCalculationDate));
+            var result = await _getFractionsCalcDateCommand.Get(new GetFractionCalcDateRequest());
 
-            _logger.LogDebug("End fractionCalculationDate action");
+            _logger.LogDebug("End GetFractionCalculationDate action");
 
             if (result == null)
             {

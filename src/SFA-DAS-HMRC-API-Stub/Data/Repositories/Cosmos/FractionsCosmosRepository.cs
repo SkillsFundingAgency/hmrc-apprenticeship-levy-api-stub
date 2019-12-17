@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents.Client;
@@ -21,7 +20,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
             _logger = logger ?? throw new ArgumentException("logger cannot be null");
         }
 
-        public async Task<FractionsData> GetByEmpRef(
+        public async Task<Fractions> GetByEmpRef(
             string empRef,
             DateTime fromDate,
             DateTime toDate)
@@ -29,17 +28,26 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
 
             _logger.LogDebug($"Getting levy declaration by, fromDate: {fromDate}, toDate: {toDate}, empRef: {empRef}");
 
-            var fractions = Client.CreateDocumentQuery<FractionsData>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
+            var fractions = Client.CreateDocumentQuery<Fractions>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
                 .Where(f => f.EmpRef == empRef)
                 .AsEnumerable()
-                .SelectMany(f => f.FractionCalculation.Where(fd => fd.CalculatedAt.Date >= fromDate.Date && fd.CalculatedAt.Date < toDate.Date)) // sorted in reverse?
+                .SelectMany(f => f.FractionCalculation
+                .Where(fd => fd.CalculatedAt.Date >= fromDate.Date && fd.CalculatedAt.Date < toDate.Date))
             ;
 
-            return new FractionsData()
+            return new Fractions()
             {
                 EmpRef = empRef,
                 FractionCalculation = fractions.ToList()
             };
+        }
+
+        public async Task<FractionCalculationDate> GetByLastCalcDate()
+        {
+            _logger.LogDebug("Getting lastCalculationDate");
+            return Client.CreateDocumentQuery<FractionCalculationDate>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
+                         .ToList()
+                         .FirstOrDefault();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SFA.DAS.HMRC.API.Stub.Domain
 {
-    public class FractionsData
+    public class Fractions
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
@@ -13,7 +13,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         public List<FractionCalculations> FractionCalculation { get; set; }
     }
 
-    public class Fraction
+    public class FractionData
     {
         [JsonProperty(PropertyName = "region")]
         public string Region { get; set; }
@@ -26,6 +26,6 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [JsonProperty(PropertyName = "calculatedat")]
         public DateTime CalculatedAt { get; set; }
         [JsonProperty(PropertyName = "fraction")]
-        public Fraction Fraction { get; set; }
+        public Fractions Fraction { get; set; }
     }
 }
