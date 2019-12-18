@@ -26,6 +26,6 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [JsonProperty(PropertyName = "calculatedat")]
         public DateTime CalculatedAt { get; set; }
         [JsonProperty(PropertyName = "fraction")]
-        public Fractions Fraction { get; set; }
+        public FractionData Fraction { get; set; }
     }
 }

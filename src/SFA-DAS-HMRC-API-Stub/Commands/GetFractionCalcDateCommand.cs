@@ -15,7 +15,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
         public async Task<GetFractionCalcDateResponse> Get(GetFractionCalcDateRequest request)
         {
-            var result = await _fractionsRepository.GetByLastCalcDate();
+            var result = await _fractionsRepository.GetLastCalcDate();
 
             if (result == null)
             {

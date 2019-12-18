@@ -10,7 +10,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
         public GetFractionsCommand(IFractionsRepository fractionsRepository)
         {
-            _fractionsRepository = fractionsRepository ?? throw new ArgumentException("FractionsRepository cannot be null");
+            _fractionsRepository = fractionsRepository ?? throw new ArgumentException("fractionsRepository cannot be null");
         }
 
         public async Task<GetFractionsResponse> Get(GetFractionsRequest request)

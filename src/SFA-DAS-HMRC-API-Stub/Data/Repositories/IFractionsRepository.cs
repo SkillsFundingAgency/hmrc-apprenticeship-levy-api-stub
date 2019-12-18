@@ -12,6 +12,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
             DateTime toDate)
         ;
 
-        Task<FractionCalculationDate> GetByLastCalcDate();
+        Task<FractionCalculationDate> GetLastCalcDate();
     }
 }

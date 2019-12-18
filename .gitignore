@@ -263,5 +263,3 @@ src/Tools/PhantomJS/tools/phantomjs/ChangeLog
 
 # local settings
 **/appsettings.Development.json
-
-Scripts/
