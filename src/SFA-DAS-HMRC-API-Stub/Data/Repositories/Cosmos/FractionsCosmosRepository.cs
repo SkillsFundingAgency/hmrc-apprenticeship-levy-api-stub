@@ -45,9 +45,10 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
         public async Task<FractionCalculationDate> GetLastCalcDate()
         {
             _logger.LogDebug("Getting lastCalculationDate");
+
             return Client.CreateDocumentQuery<FractionCalculationDate>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
-                         .ToList()
-                         .FirstOrDefault();
+                .ToList()
+                .FirstOrDefault();
         }
     }
 }

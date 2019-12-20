@@ -57,6 +57,7 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddFractionCalcDate(config)
                 .AddAuthentication(config)
                 .AddGatewayUsers(config)
+                .AddSwagger()
             ;
 
             var nLogConfiguration = new NLogConfiguration();
@@ -89,6 +90,12 @@ namespace SFA_DAS_HMRC_API_Stub
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HMRC Stub v1");
+                c.RoutePrefix = string.Empty;
+            });
         }
     }
 }
