@@ -6,9 +6,9 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 {
     public class GetFractionCalcDateCommand : ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse>
     {
-        private readonly IFractionsRepository _fractionsRepository;
+        private readonly IFractionsCalcDateRepository _fractionsRepository;
 
-        public GetFractionCalcDateCommand(IFractionsRepository fractionsRepository)
+        public GetFractionCalcDateCommand(IFractionsCalcDateRepository fractionsRepository)
         {
             _fractionsRepository = fractionsRepository ?? throw new ArgumentException("fractionsRepository cannot be null");
         }
@@ -23,7 +23,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
             }
 
             var retVal = new GetFractionCalcDateResponse();
-            retVal.LastCalculationDate = result;
+            retVal.LastCalculationDate = result.LastCalculationDate;
 
             return retVal;
         }

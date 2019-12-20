@@ -7,7 +7,7 @@ using SFA.DAS.HMRC.API.Stub.Domain;
 
 namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
 {
-    public class FractionsCosmosRepository : BaseCosmosRepository, IFractionsRepository
+    public class FractionsCosmosRepository : BaseCosmosRepository, IFractionsRepository, IFractionsCalcDateRepository
     {
         private readonly ILogger<FractionsCosmosRepository> _logger;
 
@@ -20,25 +20,22 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
             _logger = logger ?? throw new ArgumentException("logger cannot be null");
         }
 
-        public async Task<Fractions> GetByEmpRef(
-            string empRef,
-            DateTime fromDate,
-            DateTime toDate)
+        public async Task<RootObject> GetByEmpRef(string empRef, DateTime fromDate, DateTime toDate)
         {
 
             _logger.LogDebug($"Getting levy declaration by, fromDate: {fromDate}, toDate: {toDate}, empRef: {empRef}");
 
-            var fractions = Client.CreateDocumentQuery<Fractions>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
+            var fractions = Client.CreateDocumentQuery<RootObject>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
                 .Where(f => f.EmpRef == empRef)
                 .AsEnumerable()
-                .SelectMany(f => f.FractionCalculation
+                .SelectMany(f => f.FractionCalculations
                 .Where(fd => fd.CalculatedAt.Date >= fromDate.Date && fd.CalculatedAt.Date < toDate.Date))
             ;
 
-            return new Fractions()
+            return new RootObject()
             {
                 EmpRef = empRef,
-                FractionCalculation = fractions.ToList()
+                FractionCalculations = fractions.ToList()
             };
         }
 

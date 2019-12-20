@@ -8,8 +8,6 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
 {
     public class LevyDeclaration
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
         [JsonProperty(PropertyName = "empref")]
         public string EmpRef { get; set; }
         [JsonProperty(PropertyName = "declarations")]

@@ -33,7 +33,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             services.AddTransient<GetFractionCalcDateResponse>();
             services.AddTransient<ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse>, GetFractionCalcDateCommand>();
 
-            services.AddTransient<IFractionsRepository, FractionsCosmosRepository>(o =>
+            services.AddTransient<IFractionsCalcDateRepository, FractionsCosmosRepository>(o =>
             {
                 var client = o.GetRequiredService<DocumentClient>();
                 var logger = o.GetRequiredService<ILogger<FractionsCosmosRepository>>();
