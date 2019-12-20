@@ -31,8 +31,8 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         public async Task<IActionResult> GetLevyDeclaration(
             string empRef1,
             string empRef2,
-            DateTime fromDate,
-            DateTime toDate)
+            DateTime? fromDate,
+            DateTime? toDate)
         {
             _logger.LogDebug("Start GetLevyDeclaration action");
 
