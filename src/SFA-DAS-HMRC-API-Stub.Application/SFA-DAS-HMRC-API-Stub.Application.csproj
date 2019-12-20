@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>SFA_DAS_HMRC_API_Stub.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SFA-DAS-HMRC-API-Stub.Data\SFA-DAS-HMRC-API-Stub.Data.csproj" />
+    <ProjectReference Include="..\SFA-DAS-HMRC-API-Stub.Domain\SFA-DAS-HMRC-API-Stub.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
