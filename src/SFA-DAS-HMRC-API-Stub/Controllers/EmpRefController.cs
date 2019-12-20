@@ -26,7 +26,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _getEmployerReference = getEmployerReference;
             _logger = logger;
         }
-        
+
         [HttpGet]
         [Route("{empRef1}/{empRef2}")]
         public async Task<IActionResult> GetEmploymentRef(
@@ -35,10 +35,9 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         {
             _logger.LogDebug("Start GetEmploymentRef action");
 
-            var result = await _getEmployerReference.Get(new GetEmployerReferenceRequest($"{empRef1}/{empRef2}"));
+            var result = await _getEmployerReference.Get(new GetEmployerReferenceRequest($"{empRef1}/{empRef2}")); // Exception here
 
             _logger.LogDebug("End GetEmploymentRef action");
-
 
             if (result == null)
             {

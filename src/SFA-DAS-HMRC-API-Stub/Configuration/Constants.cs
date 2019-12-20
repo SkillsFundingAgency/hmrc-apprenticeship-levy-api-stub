@@ -11,6 +11,8 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
         public const string EMPLOYMENTSTATUS = "employment-status";
         public const string AUTHRECORDS = "auth-records";
         public const string LEVYDECLARATION = "levy-declaration";
+        public const string FRACTIONS = "fractions";
+        public const string FRACTIONCALCDATE = "fraction-calc-date";
         public const string GATEWAYUSERS = "gateway-user";
     }
 }

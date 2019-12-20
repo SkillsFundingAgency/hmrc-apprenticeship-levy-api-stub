@@ -11,7 +11,7 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 
         public GetEmployerReferenceRequest(string empRef)
         {
-            EmpRef = empRef; 
+            EmpRef = empRef;
         }
     }
 }

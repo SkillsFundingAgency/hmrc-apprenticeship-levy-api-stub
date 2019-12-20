@@ -24,7 +24,6 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         {
             _getLevyDeclarationCommand = getLevyDeclarationCommand;
             _logger = logger;
-
         }
 
         [HttpGet]
@@ -45,7 +44,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             {
                 return NotFound();
             }
-
+            
             return Ok(result.Declarations);
         }
     }

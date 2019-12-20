@@ -10,6 +10,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Configuration;
 using System;
+using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
+using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Infrastructure;
+using SFA.DAS.HMRC.API.Stub.Services;
+
 
 namespace SFA_DAS_HMRC_API_Stub
 {
@@ -47,13 +53,24 @@ namespace SFA_DAS_HMRC_API_Stub
                 .AddEmployerChecks(config)
                 .AddEmployerReference(config)
                 .AddLevyDeclaration(config)
+                .AddFractions(config)
+                .AddFractionCalcDate(config)
                 .AddAuthentication(config)
                 .AddGatewayUsers(config)
+                .AddSwagger()
             ;
 
-            services.AddLogging(configure =>
+            var nLogConfiguration = new NLogConfiguration();
+            services.AddLogging(options =>
             {
-                configure.AddConsole();
+                options.AddNLog(new NLogProviderOptions
+                {
+                    CaptureMessageTemplates = true,
+                    CaptureMessageProperties = true
+                });
+                options.AddConsole();
+
+                nLogConfiguration.ConfigureNLog(config);
             });
         }
 
@@ -73,6 +90,12 @@ namespace SFA_DAS_HMRC_API_Stub
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HMRC Stub v1");
+                c.RoutePrefix = string.Empty;
+            });
         }
     }
 }
