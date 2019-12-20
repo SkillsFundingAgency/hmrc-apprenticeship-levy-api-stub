@@ -6,26 +6,27 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
 {
     public class Fractions
     {
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
-        [JsonProperty(PropertyName = "empref")]
-        public string EmpRef { get; set; }
-        public List<FractionCalculations> FractionCalculation { get; set; }
-    }
-
-    public class FractionData
-    {
         [JsonProperty(PropertyName = "region")]
         public string Region { get; set; }
         [JsonProperty(PropertyName = "value")]
-        public decimal Value { get; set; }
+        public string Value { get; set; }
     }
 
-    public class FractionCalculations
+    public class FractionCalculation
     {
         [JsonProperty(PropertyName = "calculatedat")]
         public DateTime CalculatedAt { get; set; }
-        [JsonProperty(PropertyName = "fraction")]
-        public FractionData Fraction { get; set; }
+        [JsonProperty(PropertyName = "fractions")]
+        public List<Fractions> Fractions { get; set; }
+    }
+
+    public class RootObject
+    {
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
+        [JsonProperty(PropertyName = "empref")]
+        public string EmpRef { get; set; }
+        [JsonProperty(PropertyName = "fractionCalculations")]
+        public List<FractionCalculation> FractionCalculations { get; set; }
     }
 }

@@ -9,8 +9,8 @@ namespace SFA.DAS.HMRC.API.Stub.Repositories
         Task<EmployerStatus> GetEmploymentStatus(
             string empRef,
             string nino,
-            DateTime? fromDate = null,
-            DateTime? toDate = null)
+            DateTime? fromDate= null,
+            DateTime? toDate= null)
         ;
     }
 }

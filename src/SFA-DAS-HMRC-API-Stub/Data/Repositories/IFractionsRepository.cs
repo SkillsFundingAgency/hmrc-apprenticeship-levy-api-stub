@@ -6,12 +6,10 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
     public interface IFractionsRepository
     {
-        Task<Fractions> GetByEmpRef(
+        Task<RootObject> GetByEmpRef(
             string empRef,
             DateTime fromDate,
             DateTime toDate)
         ;
-
-        Task<FractionCalculationDate> GetLastCalcDate();
     }
 }

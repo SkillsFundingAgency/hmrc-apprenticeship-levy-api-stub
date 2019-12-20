@@ -6,9 +6,8 @@ using SFA.DAS.HMRC.API.Stub.Commands;
 using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
-{
-    [TypeFilter(typeof(AuthorisationFilter))]
-    [Route("apprenticeship-levy/epaye")]
+{    
+    [Route("apprenticeship-levy")]
     [ApiController]
     public class FractionsController : ControllerBase
     {
@@ -27,8 +26,9 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _logger = logger;
         }
 
+        [TypeFilter(typeof(AuthorisationFilter))]
         [HttpGet]
-        [Route("{empRef1}/{empRef2}/fractions")]
+        [Route("epaye/{empRef1}/{empRef2}/fractions")]
         public async Task<IActionResult> GetFractions(
             string empRef1,
             string empRef2,
@@ -50,7 +50,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         }
 
         [HttpGet]
-        [Route("fractions-calculation-date")]
+        [Route("fraction-calculation-date")]
         public async Task<IActionResult> GetFractionCalculationDate()
         {
             _logger.LogDebug("start GetFractionCalculationDate action");
@@ -64,7 +64,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
                 return NotFound();
             }
 
-            return Ok(result.LastCalculationDate);
+            return Ok(result.LastCalculationDate.ToString("yyyy-MM-dd"));
         }
     }
 }

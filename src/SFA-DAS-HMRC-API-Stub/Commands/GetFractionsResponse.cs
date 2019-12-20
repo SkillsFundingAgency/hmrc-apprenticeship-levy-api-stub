@@ -4,6 +4,6 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
 {
     public class GetFractionsResponse
     {
-        public Fractions Fraction { get; set; }
+        public RootObject Fraction { get; set; }
     }
 }
