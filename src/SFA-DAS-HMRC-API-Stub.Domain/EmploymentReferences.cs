@@ -29,7 +29,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [JsonProperty(PropertyName = "href")]
         public string Href { get; set; }
     }
-    
+
     public class Fraction
     {
         [JsonProperty(PropertyName = "href")]
@@ -49,7 +49,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [JsonProperty(PropertyName = "declarations")]
         public Declarations Declarations { get; set; }
         [JsonProperty(PropertyName = "fractions")]
-        public Fractions Fractions { get; set; }
+        public Fraction Fraction { get; set; }
         [JsonProperty(PropertyName = "employment-check")]
         public EmploymentCheck EmploymentCheck { get; set; }
 }

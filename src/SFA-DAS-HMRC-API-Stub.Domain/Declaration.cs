@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Domain
 {
@@ -25,7 +23,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
     public class Declaration
     {
         [JsonProperty(PropertyName = "id")]
-        public object Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "submissionTime")]
         public DateTime SubmissionTime { get; set; }
         [JsonProperty(PropertyName = "payrollPeriod")]
