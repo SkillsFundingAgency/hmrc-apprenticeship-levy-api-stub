@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Domain;
 
@@ -12,7 +12,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
     {
         private readonly ILogger<AuthRecordCosmosRepository> _logger;
 
-        public AuthRecordCosmosRepository(DocumentClient client, ILogger<AuthRecordCosmosRepository> logger, Uri collectionUri)
+        public AuthRecordCosmosRepository(IDocumentClient client, ILogger<AuthRecordCosmosRepository> logger, Uri collectionUri)
             :base(client, collectionUri)
         {
             _logger = logger ?? throw new ArgumentException("logger cannot be null");

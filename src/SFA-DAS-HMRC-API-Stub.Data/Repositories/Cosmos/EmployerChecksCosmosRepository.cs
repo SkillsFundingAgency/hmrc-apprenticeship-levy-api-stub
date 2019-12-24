@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Domain;
 using SFA.DAS.HMRC.API.Stub.Repositories;
@@ -12,7 +13,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
     {
         private readonly ILogger<EmployerChecksCosmosRepository> _logger;
 
-        public EmployerChecksCosmosRepository(DocumentClient client, ILogger<EmployerChecksCosmosRepository> logger, Uri collectionUri)
+        public EmployerChecksCosmosRepository(IDocumentClient client, ILogger<EmployerChecksCosmosRepository> logger, Uri collectionUri)
             : base(client, collectionUri)
         {
             _logger = logger ?? throw new ArgumentException("logger cannot be null"); 
@@ -24,7 +25,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 
             var query = Client.CreateDocumentQuery<EmployerStatus>(CollectionUri, new FeedOptions() { MaxItemCount = 1 })
                .Where(es => es.EmpRef == empRef && es.Nino == nino)
-               .Where(es => fromDate.Value.Date >= es.FromDate && toDate.Value.Date < es.ToDate)
             ;
 
             return query

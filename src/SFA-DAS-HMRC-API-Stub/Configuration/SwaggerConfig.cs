@@ -10,8 +10,16 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
+    /// <summary>
+    /// Swagger configuration extensions
+    /// </summary>
     public static class SwaggerConfig
     {
+        /// <summary>
+        /// Adds the swagger configuration to the <see cref="IServiceCollection"/>
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

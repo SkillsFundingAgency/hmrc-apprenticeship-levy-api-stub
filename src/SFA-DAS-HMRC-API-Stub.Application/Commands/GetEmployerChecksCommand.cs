@@ -28,9 +28,9 @@ namespace SFA.DAS.HMRC.API.Stub.Commands
             {
                 Empref = result.EmpRef,
                 Nino = result.Nino,
-                Employed = result.Employed,
-                FromDate = result.FromDate.Value,
-                ToDate = result.ToDate.Value
+                Employed = (request.FromDate.Value.Date >= result.FromDate && request.ToDate.Value.Date < result.ToDate),
+                FromDate = request.FromDate,
+                ToDate = request.ToDate
             };
         }
     }

@@ -5,15 +5,19 @@ using NLog.Config;
 using NLog.Targets;
 using SFA.DAS.NLog.Targets.Redis.DotNetCore;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Infrastructure
 {
+    /// <summary>
+    /// NLog configuration
+    /// </summary>
     public class NLogConfiguration
     {
+        /// <summary>
+        /// Confgures the application for NLog logging
+        /// </summary>
+        /// <param name="configuration"></param>
         public void ConfigureNLog(IConfiguration configuration)
         {
             var appName = configuration.GetValue<string>("AppName");

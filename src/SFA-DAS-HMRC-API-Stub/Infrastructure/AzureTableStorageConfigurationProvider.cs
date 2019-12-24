@@ -6,6 +6,11 @@ using Newtonsoft.Json.Linq;
 
 namespace SFA.DAS.HMRC.API.Stub.Infrastructure
 {
+    /// <summary>
+    /// Azure table storeage configuration provider
+    /// </summary>
+    /// <seealso cref="AzureTableStorageConfigurationSource"/>
+    /// <seealso cref="AzureTableStorageConfigurationExtensions"/>
     public class AzureTableStorageConfigurationProvider : ConfigurationProvider
     {
         private readonly string _connection;
@@ -14,6 +19,14 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure
         private readonly string _appName;
         private readonly string _appStorageName;
 
+        /// <summary>
+        /// Creates a new instance of <see cref="AzureTableStorageConfigurationProvider"/>
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="appName"></param>
+        /// <param name="environment"></param>
+        /// <param name="version"></param>
+        /// <param name="appStorageName"></param>
         public AzureTableStorageConfigurationProvider(string connection, string appName, string environment, string version, string appStorageName)
         {
             _connection = connection;
@@ -23,6 +36,9 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure
             _appStorageName = appStorageName;
         }
 
+        /// <summary>
+        /// Loads the configuration
+        /// </summary>
         public override void Load()
         {
             if (_environment.Equals("DEV", StringComparison.CurrentCultureIgnoreCase))

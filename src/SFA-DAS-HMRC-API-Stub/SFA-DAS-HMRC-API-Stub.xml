@@ -4,5 +4,228 @@
         <name>SFA-DAS-HMRC-API-Stub</name>
     </assembly>
     <members>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Configuration.AuthenticationConfig">
+            <summary>
+            Authentication configuration <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> extensions
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Configuration.AuthenticationConfig.AddAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds authentication services to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Configuration.Config">
+            <summary>
+            Configration extensions
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Configuration.Config.AddConfig(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds configuration to the <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> from files and table storage
+            </summary>
+            <param name="builder"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Configuration.SwaggerConfig">
+            <summary>
+            Swagger configuration extensions
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Configuration.SwaggerConfig.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the swagger configuration to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Configuration.Swagger.AuthHeaderFilter">
+            <summary>
+            Authentication header filter
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Configuration.Swagger.AuthHeaderFilter.Apply(Swashbuckle.AspNetCore.Swagger.Operation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Adds an Authorization field to the Swagger document
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Controllers.EmployerChecksController.GetEmploymentStatus(System.String,System.String,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Returns the employment status for the given employer between the given dates
+            </summary>
+            <param name="empRef1">The first part of the employer reference</param>
+            <param name="empRef2">The second part of the employer reference</param>
+            <param name="nino">The employers nino</param>
+            <param name="fromDate">The from date</param>
+            <param name="toDate">The to date</param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Filters.AuthenticationBuilderExtensions">
+            <summary>
+            Provides authentication builder extensions
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.AuthenticationBuilderExtensions.AddCustomAuth(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationOptions})">
+            <summary>
+            Adds a custom authetication scheme
+            </summary>
+            <param name="builder">Authentication builder</param>
+            <param name="configureOptions">Configuration options</param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter">
+            <summary>
+            Authorisation Filter
+            Should only be used where there is empRef1 and empRef2 parameters are passed to the action otherwise a <see cref="T:Microsoft.AspNetCore.Mvc.BadRequestObjectResult"/> is returned in the result
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter.#ctor(SFA.DAS.HMRC.API.Stub.Services.IAuthenticate)">
+            <summary>
+            Creates a new instance of <see cref="T:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter"/>
+            </summary>
+            <param name="authService"></param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            Fires after the action has been executed
+            Performs no action in this instance
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Fires before the action has been executed
+            Checks that there is a valid gatewayid claim for the user and validates that the gatewayid is valid for the empRef1/empRef2 action arguments
+            If the user is privileged then the empRef1/empRef2 check is skipped as the user is deemed to have access to all employer data
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationHandler">
+            <summary>
+            Filter handles authentication on incoming requests
+            </summary>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationOptions"/>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Filters.AuthorisationFilter"/>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Filters.AuthenticationBuilderExtensions"/>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock,SFA.DAS.HMRC.API.Stub.Services.IAuthenticate)">
+            <summary>
+            Creates a new instance of <see cref="T:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationHandler"/>
+            </summary>
+            <param name="options">Configuration options</param>
+            <param name="logger">Logger</param>
+            <param name="encoder">Url encoder</param>
+            <param name="clock">System clock</param>
+            <param name="authService">Authentication service</param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>
+            Handles authentication on incoming requests by checking the authorization header for a valid bearer token.
+            Where no token exists or it is invalid an Unauthorized response is returned
+            Where the token is valid a <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationTicket"/> is returned containing a <see cref="T:System.Security.Claims.ClaimsPrincipal"/> with the appropriate <see cref="T:System.Security.Claims.ClaimsIdentity"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationOptions">
+            <summary>
+            Contains the bearer authentication options
+            </summary>
+        </member>
+        <member name="P:SFA.DAS.HMRC.API.Stub.Filters.BearerAuthenticationOptions.DefaultScheme">
+            <summary>
+            THe default scheme for bearer authentication
+            </summary>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationExtensions">
+            <summary>
+            Azure table storage extensions
+            </summary>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource"/>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider"/>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationExtensions.AddAzureTableStorageConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds Azure table storage configuration
+            </summary>
+            <param name="builder"></param>
+            <param name="connection"></param>
+            <param name="appName"></param>
+            <param name="environment"></param>
+            <param name="version"></param>
+            <param name="appStorageName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider">
+            <summary>
+            Azure table storeage configuration provider
+            </summary>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource"/>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationExtensions"/>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider"/>
+            </summary>
+            <param name="connection"></param>
+            <param name="appName"></param>
+            <param name="environment"></param>
+            <param name="version"></param>
+            <param name="appStorageName"></param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider.Load">
+            <summary>
+            Loads the configuration
+            </summary>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource">
+            <summary>
+            Azure table storage configuration source
+            </summary>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationProvider"/>
+            <seealso cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationExtensions"/>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource"/>
+            </summary>
+            <param name="connection"></param>
+            <param name="appName"></param>
+            <param name="environment"></param>
+            <param name="version"></param>
+            <param name="appStorageName"></param>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.AzureTableStorageConfigurationSource.Build(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Builds the configuration provider
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Infrastructure.ConfigurationItem">
+            <summary>
+            Configuration item
+            </summary>
+        </member>
+        <member name="P:SFA.DAS.HMRC.API.Stub.Infrastructure.ConfigurationItem.Data">
+            <summary>
+            Configuration data
+            </summary>
+        </member>
+        <member name="T:SFA.DAS.HMRC.API.Stub.Infrastructure.NLogConfiguration">
+            <summary>
+            NLog configuration
+            </summary>
+        </member>
+        <member name="M:SFA.DAS.HMRC.API.Stub.Infrastructure.NLogConfiguration.ConfigureNLog(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Confgures the application for NLog logging
+            </summary>
+            <param name="configuration"></param>
+        </member>
     </members>
 </doc>

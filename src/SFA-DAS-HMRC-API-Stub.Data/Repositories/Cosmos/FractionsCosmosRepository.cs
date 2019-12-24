@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Domain;
@@ -12,7 +13,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
         private readonly ILogger<FractionsCosmosRepository> _logger;
 
         public FractionsCosmosRepository(
-            DocumentClient client,
+            IDocumentClient client,
             ILogger<FractionsCosmosRepository> logger,
             Uri collectionUri
             ) : base(client, collectionUri)
@@ -35,7 +36,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos
             return new RootObject()
             {
                 EmpRef = empRef,
-                FractionCalculations = fractions.ToList()
+                FractionCalculations = fractions.OrderBy(f => f.CalculatedAt).ToList()
             };
         }
 

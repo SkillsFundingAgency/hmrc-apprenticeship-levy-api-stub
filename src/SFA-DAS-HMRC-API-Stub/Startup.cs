@@ -10,12 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Configuration;
 using System;
-using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
 using SFA.DAS.HMRC.API.Stub.Infrastructure;
-using SFA.DAS.HMRC.API.Stub.Services;
-
 
 namespace SFA_DAS_HMRC_API_Stub
 {

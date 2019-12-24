@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Domain;
 using System;
@@ -12,7 +13,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
         private readonly ILogger<EmployerReferenceCosmosRepository> _logger;
 
         public EmployerReferenceCosmosRepository(
-            DocumentClient client,
+            IDocumentClient client,
             ILogger<EmployerReferenceCosmosRepository> logger,
             Uri collectionUri
             ) : base(client, collectionUri)

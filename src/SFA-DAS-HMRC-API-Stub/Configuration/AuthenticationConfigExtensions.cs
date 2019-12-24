@@ -9,8 +9,17 @@ using SFA.DAS.HMRC.API.Stub.Services;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
+    /// <summary>
+    /// Authentication configuration <see cref="IServiceCollection"/> extensions
+    /// </summary>
     public static class AuthenticationConfig
     {
+        /// <summary>
+        /// Adds authentication services to the <see cref="IServiceCollection"/>
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IAuthRecordRepository, AuthRecordCosmosRepository>(o =>

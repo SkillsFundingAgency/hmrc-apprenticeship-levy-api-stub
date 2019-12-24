@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Domain;
 using System;
@@ -12,7 +13,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
         private readonly ILogger<LevyDeclarationCosmosRepository> _logger;
 
         public LevyDeclarationCosmosRepository(
-            DocumentClient client,
+            IDocumentClient client,
             ILogger<LevyDeclarationCosmosRepository> logger,
             Uri collectionUri
             ) : base(client, collectionUri)
@@ -44,7 +45,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
             return new LevyDeclaration()
             {
                 EmpRef = empRef,
-                Declarations = declarations.ToList()
+                Declarations = declarations.OrderBy(d => d.SubmissionTime).ToList()
             };
         }
     }

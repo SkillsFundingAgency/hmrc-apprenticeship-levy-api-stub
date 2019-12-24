@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
 {
     public abstract class BaseCosmosRepository
     {
-        protected readonly DocumentClient Client;
+        protected readonly IDocumentClient Client;
         protected readonly Uri CollectionUri;
 
         protected BaseCosmosRepository(
-            DocumentClient client,
+            IDocumentClient client,
             Uri collectionUri
             )
         {
