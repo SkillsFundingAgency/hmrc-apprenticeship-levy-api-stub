@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using MongoDB.Driver;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Data.Repositories.Mongo;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
@@ -13,14 +15,14 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
         {
             services.AddTransient<GetLevyDeclarationRequest>();
             services.AddTransient<GetLevyDeclarationResponse>();
-            services.AddTransient<ICommand<GetLevyDeclarationRequest, GetLevyDeclarationResponse>, GetLevyDeclarationCommand>();
-            services.AddTransient<ILevyDeclarationRepository, LevyDeclarationCosmosRepository>(o =>
+            services.AddTransient<IQuery<GetLevyDeclarationRequest, GetLevyDeclarationResponse>, GetLevyDeclarationQuery>();
+            services.AddTransient<ILevyDeclarationRepository, LevyDeclarationRepository>(o =>
             {
-                var client = o.GetRequiredService<DocumentClient>();
-                var logger = o.GetRequiredService<ILogger<LevyDeclarationCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.LEVYDECLARATION);
+                var client = o.GetRequiredService<MongoClient>();
+                var logger = o.GetRequiredService<ILogger<LevyDeclarationRepository>>();
+                var database = client.GetDatabase(config.GetValue<string>("mongoValues:databaseName"));
 
-                return new LevyDeclarationCosmosRepository(client, logger, collectionUri);
+                return new LevyDeclarationRepository(database, logger);
             });
 
             return services;

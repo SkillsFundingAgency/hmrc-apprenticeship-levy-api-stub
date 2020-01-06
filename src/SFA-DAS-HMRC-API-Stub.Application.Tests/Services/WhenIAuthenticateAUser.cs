@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
 using System.Threading.Tasks;
@@ -84,14 +83,14 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
             {
                 new AuthRecord
                 {
-                    Id = "1",
+                    Id = 1,
                     AccessToken = "123456",
                     ClientId = "Test",
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = new MongoDB.Bson.BsonDocument(),
                     ExpiresIn = 14440,
                     GatewayId = "Test",
                     IsPrivileged = privileged,
-                    RefreshedAt = DateTime.Now,
+                    RefreshedAt = new MongoDB.Bson.BsonDocument(),
                     RefreshToken = string.Empty,
                     Scope = "test.scope"
                 }

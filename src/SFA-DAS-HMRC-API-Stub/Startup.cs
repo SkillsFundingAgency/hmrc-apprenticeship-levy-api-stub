@@ -12,12 +12,13 @@ using SFA.DAS.HMRC.API.Stub.Configuration;
 using System;
 using NLog.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Infrastructure;
+using MongoDB.Driver;
 
 namespace SFA_DAS_HMRC_API_Stub
 {
     public class Startup
     {
-        private DocumentClient _client;
+        private MongoClient _client;
 
         public Startup(IConfiguration configuration)
         {
@@ -37,10 +38,9 @@ namespace SFA_DAS_HMRC_API_Stub
             var config = new ConfigurationBuilder()
                 .AddConfig(Configuration);
 
-            _client = new DocumentClient(new Uri(config.GetValue<string>("cosmosValues:endpointUrl")), config.GetValue<string>("cosmosValues:authKey"), new ConnectionPolicy() { ConnectionMode = ConnectionMode.Gateway, ConnectionProtocol = Protocol.Https });
-            _client.CreateDatabaseIfNotExistsAsync(new Database { Id = config.GetValue<string>("cosmosValues:databaseName") }).Wait();
+            _client = new MongoClient(config.GetValue<string>("mongoValues:databaseUri"));
 
-            services.AddSingleton<DocumentClient>(o =>
+            services.AddSingleton<MongoClient>(o =>
             {
                 return _client;
             });
@@ -83,7 +83,8 @@ namespace SFA_DAS_HMRC_API_Stub
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
+            app.UseIdentityServer();
+            //app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();

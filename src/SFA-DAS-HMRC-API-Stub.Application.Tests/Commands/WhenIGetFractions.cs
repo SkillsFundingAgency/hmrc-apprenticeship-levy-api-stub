@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Repositories;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
@@ -55,7 +55,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     FractionCalculations = fractions 
                 });
 
-            var sut = new GetFractionsCommand(fractionsRepository.Object);
+            var sut = new GetFractionsQuery(fractionsRepository.Object);
             
             // Act
             var result = await sut.Get(new GetFractionsRequest(empRef, fromDate, toDate));
@@ -85,7 +85,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                 .Setup(x => x.GetByEmpRef(empRef, fromDate, toDate))
                 .ReturnsAsync(default(RootObject));
 
-            var sut = new GetFractionsCommand(fractionsRepository.Object);
+            var sut = new GetFractionsQuery(fractionsRepository.Object);
             
             // Act
             var result = await sut.Get(new GetFractionsRequest(empRef, fromDate, toDate));

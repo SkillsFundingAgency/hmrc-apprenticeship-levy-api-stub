@@ -1,4 +1,5 @@
 ﻿using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,11 @@ namespace SFA.DAS.HMRC.API.Stub.Services
 
             var gatewayUsers = await _gatewayRepository.GetGatewayRecordsForId(gatewayId);
             return gatewayUsers.Any(u => u.EmpRef == empRef);
+        }
+
+        public async Task<GatewayUser> Validate(string gatewayId, string password)
+        {
+            return await _gatewayRepository.GetGatewayRecordsByIdAndPassword(gatewayId, password);
         }
     }
 }

@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Repositories;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
@@ -36,7 +36,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Nino = nino
                 });
 
-            var sut = new GetEmployerChecksCommand(employerChecksRepository.Object);
+            var sut = new GetEmployerChecksQuery(employerChecksRepository.Object);
 
             // Act
             var result = await sut.Get(new GetEmployerChecksRequest(empRef, nino, fromDate, toDate));
@@ -64,7 +64,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                 .Setup(x => x.GetEmploymentStatus(empRef, nino, fromDate, toDate))
                 .ReturnsAsync(default(EmployerStatus));
 
-            var sut = new GetEmployerChecksCommand(employerChecksRepository.Object);
+            var sut = new GetEmployerChecksQuery(employerChecksRepository.Object);
 
             // Act
             var result = await sut.Get(new GetEmployerChecksRequest(empRef, nino, fromDate, toDate));
@@ -95,7 +95,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Nino = nino
                 });
 
-            var sut = new GetEmployerChecksCommand(employerChecksRepository.Object);
+            var sut = new GetEmployerChecksQuery(employerChecksRepository.Object);
 
             // Act
             var result = await sut.Get(new GetEmployerChecksRequest(empRef, nino, fromDate, toDate.AddDays(-1).Date));
@@ -127,7 +127,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Nino = nino
                 });
 
-            var sut = new GetEmployerChecksCommand(employerChecksRepository.Object);
+            var sut = new GetEmployerChecksQuery(employerChecksRepository.Object);
 
             // Act
             var result = await sut.Get(new GetEmployerChecksRequest(empRef, nino, fromDate, toDate));

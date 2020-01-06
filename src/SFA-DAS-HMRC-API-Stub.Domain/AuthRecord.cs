@@ -1,32 +1,35 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Domain
 {
     public class AuthRecord
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-        [JsonProperty(PropertyName = "gatewayID")]
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        [BsonElement("_id")]
+        public ObjectId ObjectId { get; set; }
+        [BsonElement("id")]
+        public long Id { get; set; }
+        [BsonElement("gatewayID")]
         public string GatewayId { get; set; }
-        [JsonProperty(PropertyName = "accessToken")]
+        [BsonElement("accessToken")]
         public string AccessToken { get; set; }
-        [JsonProperty(PropertyName = "refreshToken")]
+        [BsonElement("refreshToken")]
         public string RefreshToken { get; set; }
-        [JsonProperty(PropertyName = "privileged")]
+        [BsonElement("privileged")]
         public bool IsPrivileged { get; set; }
-        [JsonProperty(PropertyName = "clientID")]
+        [BsonElement("clientID")]
         public string ClientId { get; set; }
-        [JsonProperty(PropertyName = "createdAt")]
+        [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; }
-        [JsonProperty(PropertyName = "refreshedAt")]
+        [BsonElement("refreshedAt")]
         public DateTime RefreshedAt { get; set; }
-        [JsonProperty(PropertyName = "expiresIn")]
+        [BsonElement("expiresIn")]
         public int ExpiresIn { get; set; }
-        [JsonProperty(PropertyName = "scope")]
+        [BsonElement("scope")]
         public string Scope { get; set; }
     }
 }

@@ -2,24 +2,23 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
-using SFA.DAS.HMRC.API.Stub.Filters;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 
 namespace SFA.DAS.HMRC.API.Stub.Controllers
 {
-    [TypeFilter(typeof(AuthorisationFilter))]
+    //[TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmployerChecksController : ControllerBase
     {
-        private readonly ICommand<GetEmployerChecksRequest, GetEmployerChecksResponse> _getEmployerChecksCommand;
+        private readonly IQuery<GetEmployerChecksRequest, GetEmployerChecksResponse> _getEmployerChecksQuery;
         private readonly ILogger<EmployerChecksController> _logger;
 
         public EmployerChecksController(
-            ICommand<GetEmployerChecksRequest, GetEmployerChecksResponse> getEmployerChecksCommand,
+            IQuery<GetEmployerChecksRequest, GetEmployerChecksResponse> getEmployerChecksCommand,
             ILogger<EmployerChecksController> logger)
         {
-            _getEmployerChecksCommand = getEmployerChecksCommand;
+            _getEmployerChecksQuery = getEmployerChecksCommand;
             _logger = logger;
         }
 
@@ -51,7 +50,7 @@ namespace SFA.DAS.HMRC.API.Stub.Controllers
 #pragma warning restore S3358 // Ternary operators should not be nested
             }
 
-            var result = await _getEmployerChecksCommand.Get(new GetEmployerChecksRequest($"{empRef1}/{empRef2}", nino, fromDate, toDate));
+            var result = await _getEmployerChecksQuery.Get(new GetEmployerChecksRequest($"{empRef1}/{empRef2}", nino, fromDate, toDate));
 
             _logger.LogDebug("End GetEmploymentStatus action");
 

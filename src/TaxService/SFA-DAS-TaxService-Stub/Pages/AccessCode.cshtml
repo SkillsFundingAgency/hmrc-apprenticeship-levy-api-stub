@@ -1,0 +1,41 @@
+﻿@page
+@model SFA_DAS_TaxService_Stub.Pages.AccessCodeModel
+@{
+    ViewData["Title"] = "Enter your access code";
+}
+
+<h1>Enter your access code</h1>
+
+
+@section InsideHeader {
+    <div class="header-proposition">
+        <div class="content">
+            <nav id="proposition-menu" class="header__menu" role="navigation">
+                <span class="header__menu__proposition-name">Business tax account</span>
+            </nav>
+        </div>
+    </div>
+}
+
+@section Content {
+    <div>
+        <article class="content__body">
+            <h1>Enter your access code.</h1>
+            <p>We just sent a 6-digit access code by text to: <strong>*********000</strong></p>
+            <p>It may take a few minutes to arrive.</p>
+            <div class="alert">No need to enter anything here - just press Continue.</div>
+            <form method="post">
+                <fieldset class="form-field-group">
+                    <div class="form-field">
+                        <label class="label--inline" for="accessCode">Access code</label>
+                        <input type="text" id="accessCode" name="accessCode" required />
+                    </div>
+                    <div class="form-field">
+                        <input class="button" type="submit" value="Continue" />
+                    </div>
+                </fieldset>
+            </form>
+            <a href="">I haven't got access to that phone</a>
+        </article>
+    </div>
+}

@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>SFA_DAS_HMRC_API_Stub.Domain</RootNamespace>
+    <RootNamespace>SFA.DAS.HMRC.API.Stub.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

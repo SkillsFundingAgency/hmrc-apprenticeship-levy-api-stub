@@ -7,5 +7,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
     public interface IGatewayRepository
     {
         Task<IEnumerable<GatewayUser>> GetGatewayRecordsForId(string id);
+        Task<GatewayUser> GetGatewayRecordsByIdAndPassword(string gatewayId, string password);
     }
 }

@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
-using SFA.DAS.HMRC.API.Stub.Filters;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {    
@@ -11,22 +10,22 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
     [ApiController]
     public class FractionsController : ControllerBase
     {
-        private readonly ICommand<GetFractionsRequest, GetFractionsResponse> _getFractionsCommand;
-        private readonly ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse> _getFractionsCalcDateCommand;
+        private readonly IQuery<GetFractionsRequest, GetFractionsResponse> _getFractionsQuery;
+        private readonly IQuery<GetFractionCalcDateRequest, GetFractionCalcDateResponse> _getFractionsCalcDateQuery;
         private readonly ILogger<FractionsController> _logger;
 
 
         public FractionsController(
-            ICommand<GetFractionsRequest, GetFractionsResponse> getFractionsCommand,
-            ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse> getFractionCalcDateCommand,
+            IQuery<GetFractionsRequest, GetFractionsResponse> getFractionsCommand,
+            IQuery<GetFractionCalcDateRequest, GetFractionCalcDateResponse> getFractionCalcDateCommand,
             ILogger<FractionsController> logger)
         {
-            _getFractionsCommand = getFractionsCommand;
-            _getFractionsCalcDateCommand = getFractionCalcDateCommand;
+            _getFractionsQuery = getFractionsCommand;
+            _getFractionsCalcDateQuery = getFractionCalcDateCommand;
             _logger = logger;
         }
 
-        [TypeFilter(typeof(AuthorisationFilter))]
+        //[TypeFilter(typeof(AuthorisationFilter))]
         [HttpGet]
         [Route("epaye/{empRef1}/{empRef2}/fractions")]
         public async Task<IActionResult> GetFractions(
@@ -37,7 +36,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         {
             _logger.LogDebug("Start GetFractions action");
 
-            var result = await _getFractionsCommand.Get(new GetFractionsRequest($"{empRef1}/{empRef2}", fromDate, toDate));
+            var result = await _getFractionsQuery.Get(new GetFractionsRequest($"{empRef1}/{empRef2}", fromDate, toDate));
 
             _logger.LogDebug("End GetFractions action");
 
@@ -55,7 +54,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         {
             _logger.LogDebug("start GetFractionCalculationDate action");
 
-            var result = await _getFractionsCalcDateCommand.Get(new GetFractionCalcDateRequest());
+            var result = await _getFractionsCalcDateQuery.Get(new GetFractionCalcDateRequest());
 
             _logger.LogDebug("End GetFractionCalculationDate action");
 

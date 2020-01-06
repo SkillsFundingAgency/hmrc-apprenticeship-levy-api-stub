@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace SFA.DAS.HMRC.API.Stub.Commands
+namespace SFA.DAS.HMRC.API.Stub.Application.Commands
 {
     public interface ICommand<TIn, TOut>
     {
-        Task<TOut> Get(TIn request);
+        Task<TOut> Execute(TIn request);
     }
 }

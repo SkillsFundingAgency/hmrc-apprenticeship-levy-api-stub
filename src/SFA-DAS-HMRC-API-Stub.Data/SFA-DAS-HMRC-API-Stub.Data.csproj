@@ -2,12 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>SFA_DAS_HMRC_API_Stub.Data</RootNamespace>
+    <RootNamespace>SFA.DAS.HMRC.API.Stub.Data</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\Cosmos\**" />
+    <EmbeddedResource Remove="Repositories\Cosmos\**" />
+    <None Remove="Repositories\Cosmos\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.9.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
   </ItemGroup>
 
   <ItemGroup>

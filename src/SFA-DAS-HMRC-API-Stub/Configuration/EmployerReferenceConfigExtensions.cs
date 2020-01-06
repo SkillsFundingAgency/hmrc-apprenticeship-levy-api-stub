@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using MongoDB.Driver;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Data.Repositories;
+using SFA.DAS.HMRC.API.Stub.Data.Repositories.Mongo;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
@@ -13,15 +15,15 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
         {
             services.AddTransient<GetEmployerReferenceRequest>();
             services.AddTransient<GetEmployerrReferenceResponse>();
-            services.AddTransient<ICommand<GetEmployerReferenceRequest, GetEmployerrReferenceResponse>, GetEmployerReferenceCommand>();
+            services.AddTransient<IQuery<GetEmployerReferenceRequest, GetEmployerrReferenceResponse>, GetEmployerReferenceQuery>();
 
-            services.AddTransient<IEmployerReferenceRepository, EmployerReferenceCosmosRepository>(o =>
+            services.AddTransient<IEmployerReferenceRepository, EmployerReferenceRepository>(o =>
             {
-                var client = o.GetRequiredService<DocumentClient>();
-                var logger = o.GetRequiredService<ILogger<EmployerReferenceCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.EMPLOYERREFERENCE);
+                var client = o.GetRequiredService<MongoClient>();
+                var logger = o.GetRequiredService<ILogger<EmployerReferenceRepository>>();
+                var database = client.GetDatabase(config.GetValue<string>("mongoValues:databaseName"));
 
-                return new EmployerReferenceCosmosRepository(client, logger, collectionUri);
+                return new EmployerReferenceRepository(database, logger);
             });
 
             return services;

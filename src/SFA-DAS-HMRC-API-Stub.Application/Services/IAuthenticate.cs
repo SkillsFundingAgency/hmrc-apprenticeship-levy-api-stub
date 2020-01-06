@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SFA.DAS.HMRC.API.Stub.Domain;
+using System.Threading.Tasks;
 
 namespace SFA.DAS.HMRC.API.Stub.Services
 {
@@ -6,5 +7,6 @@ namespace SFA.DAS.HMRC.API.Stub.Services
     {
         Task<AuthResponse> IsAuthenticated(string token);
         Task<bool> IsAuthorized(string gatewayId, string empRef);
+        Task<GatewayUser> Validate(string gatewayId, string password);
     }
 }
