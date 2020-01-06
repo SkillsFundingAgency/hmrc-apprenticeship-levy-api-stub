@@ -34,7 +34,7 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
                 AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                 Enabled = true,
                 RedirectUris = { _redirectUrls },
-                AccessTokenType = AccessTokenType.Reference
+                AccessTokenType = AccessTokenType.Jwt
             };
         }
     }

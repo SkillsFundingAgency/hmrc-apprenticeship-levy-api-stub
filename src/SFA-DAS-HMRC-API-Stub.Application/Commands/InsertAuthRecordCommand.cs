@@ -15,7 +15,9 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Commands
 
         public async Task<InsertAuthRecordResponse> Execute(InsertAuthRecordRequest request)
         {
-            throw new NotImplementedException();
+            await _authRecordRepository.Insert(request.AuthRecord);
+
+            return new InsertAuthRecordResponse();
         }
     }
 }

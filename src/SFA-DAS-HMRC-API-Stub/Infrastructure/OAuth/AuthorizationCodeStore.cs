@@ -46,9 +46,11 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
                 Subject = new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity(query.AuthCode.GatewayId),
                 new List<Claim>
                 {
-                    new Claim(JwtClaimTypes.Subject, query.AuthCode.ClientId),
+                    new Claim(JwtClaimTypes.Subject, query.AuthCode.GatewayId),
                     new Claim(JwtClaimTypes.AuthenticationTime, TimeUtils.TimeSinceEpoc().ToString()),
-                    new Claim(JwtClaimTypes.IdentityProvider, "hmrc-stub")
+                    new Claim(JwtClaimTypes.IdentityProvider, "hmrc-stub"),
+                    new Claim(JwtClaimTypes.Scope, query.AuthCode.Scope),
+                    //new Claim("gateway_id", query.AuthCode.GatewayId)
                 }))
             };
         }

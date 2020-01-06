@@ -86,7 +86,8 @@ namespace SFA_DAS_TaxService_Stub.Pages
                     GatewayId = HttpContext.Session.GetString(Constants.GATEWAYIDSESSIONKEY),
                     expiresIn = CalcExpiresIn(),
                     RedirectUri = auth.AuthRequest.RedirectUri,
-                    CreatedAt = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    Scope = auth.AuthRequest.Scope
                 }
             });
 

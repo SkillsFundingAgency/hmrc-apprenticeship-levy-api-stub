@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.HMRC.API.Stub.Application.Queries;
+using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA.DAS.HMRC.API.Stub.Controllers
 {
-    //[TypeFilter(typeof(AuthorisationFilter))]
+    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmployerChecksController : ControllerBase

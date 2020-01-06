@@ -10,7 +10,7 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
-    //[TypeFilter(typeof(AuthorisationFilter))]
+    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class LevyDeclarationController : ControllerBase

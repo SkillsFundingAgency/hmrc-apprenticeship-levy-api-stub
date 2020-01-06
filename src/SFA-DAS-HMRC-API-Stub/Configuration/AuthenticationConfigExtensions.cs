@@ -1,6 +1,8 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4.AccessTokenValidation;
+using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,14 +46,14 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
                 return new AuthRecordRepository(database, logger);
             });
 
-            //services.AddTransient<IAuthenticate, AuthenticationService>();
-            //services.AddScoped<AuthorisationFilter>();
-            //services.AddAuthentication(cfg =>
-            //{
-            //    cfg.DefaultScheme = BearerAuthenticationOptions.DefaultScheme;
-            //    cfg.DefaultChallengeScheme = BearerAuthenticationOptions.DefaultScheme;
-            //})
-            //.AddCustomAuth(o => { });
+            services.AddTransient<IAuthenticate, AuthenticationService>();
+            services.AddScoped<AuthorisationFilter>();
+            services.AddAuthentication(cfg =>
+            {
+                cfg.DefaultScheme = BearerAuthenticationOptions.DefaultScheme;
+                cfg.DefaultChallengeScheme = BearerAuthenticationOptions.DefaultScheme;
+            })
+            .AddCustomAuth(o => { });
 
             services.AddTransient<IApplicationRepository, ApplicationRepository>(o =>
             {
@@ -96,7 +98,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             services.AddTransient<ICommand<DeleteAuthCodeByCodeRequest, DeleteAuthCodeByCodeResponse>, DeleteAuthCodeByCodeCommand>();
             services.AddTransient<ICommand<InsertAuthCodeRequest, InsertAuthCodeResponse>, InsertAuthCodeCommand>();
             services.AddTransient<IQuery<GetAllScopesRequest, GetAllScopesResponse>, GetAllScopesQuery>();
-
+            services.AddTransient<ICommand<InsertAuthRecordRequest, InsertAuthRecordResponse>, InsertAuthRecordCommand>();
             services.AddIdentityServer(o =>
             {
                 o.UserInteraction = new IdentityServer4.Configuration.UserInteractionOptions()

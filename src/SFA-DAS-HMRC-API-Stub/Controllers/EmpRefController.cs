@@ -11,6 +11,8 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = "Bearer")]
+    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmpRefController : ControllerBase
