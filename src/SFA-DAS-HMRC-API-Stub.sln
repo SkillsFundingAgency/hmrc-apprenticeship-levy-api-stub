@@ -17,9 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA-DAS-HMRC-API-Stub.Appli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaxService", "TaxService", "{86BB1F22-CADF-47F9-9F3B-35C0A3BBCE0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA-DAS-TaxService-Stub", "TaxService\SFA-DAS-TaxService-Stub\SFA-DAS-TaxService-Stub.csproj", "{9B023E49-C96D-42B8-AB9A-D043EFC50EEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA-DAS-TaxService-Stub", "TaxService\SFA-DAS-TaxService-Stub\SFA-DAS-TaxService-Stub.csproj", "{9B023E49-C96D-42B8-AB9A-D043EFC50EEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA-DAS-HMRC-Api-Stub.Configuration", "SFA-DAS-HMRC-Api-Stub.Configuration\SFA-DAS-HMRC-Api-Stub.Configuration.csproj", "{2194DE4D-253A-46FC-96EB-B487FD0DC3ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA-DAS-HMRC-Api-Stub.Configuration", "SFA-DAS-HMRC-Api-Stub.Configuration\SFA-DAS-HMRC-Api-Stub.Configuration.csproj", "{2194DE4D-253A-46FC-96EB-B487FD0DC3ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{9135F752-4C2D-4542-9E0C-FABE459137B8}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\CODEOWNERS = ..\CODEOWNERS
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -86,11 +86,11 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Id = 1,
                     AccessToken = "123456",
                     ClientId = "Test",
-                    CreatedAt = new MongoDB.Bson.BsonDocument(),
+                    CreatedAt = DateTime.Now,
                     ExpiresIn = 14440,
                     GatewayId = "Test",
                     IsPrivileged = privileged,
-                    RefreshedAt = new MongoDB.Bson.BsonDocument(),
+                    RefreshedAt = DateTime.Now,
                     RefreshToken = string.Empty,
                     Scope = "test.scope"
                 }
