@@ -45,7 +45,7 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories.Mongo
             return new LevyDeclaration()
             {
                 EmpRef = empRef,
-                Declarations = declarations.OrderBy(d => d.SubmissionTime).ToList()
+                Declarations = declarations.OrderByDescending(d => d.Id).ToList()
             };
         }
     }

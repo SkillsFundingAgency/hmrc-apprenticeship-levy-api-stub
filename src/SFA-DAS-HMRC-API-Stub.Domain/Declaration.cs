@@ -37,8 +37,8 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [BsonElement("payrollPeriod")]
         public PayrollPeriod PayrollPeriod { get; set; }
         [BsonElement("levyDueYTD")]
-        public decimal LevyDueYTD { get; set; }
+        public int LevyDueYTD { get; set; }
         [BsonElement("levyAllowanceForFullYear")]
-        public decimal LevyAllowanceForFullYear { get; set; }
+        public int LevyAllowanceForFullYear { get; set; }
     }
 }
