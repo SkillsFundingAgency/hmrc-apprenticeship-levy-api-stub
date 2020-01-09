@@ -8,6 +8,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
     public class AuthRequest
     {
         [BsonId]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId ObjectId { get; set; }
         [BsonElement("scope")]

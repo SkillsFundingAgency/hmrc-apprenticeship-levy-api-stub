@@ -11,7 +11,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        [BsonElement("id")]
+        [BsonElement("_id")]
         public string Id { get; set; }
         [BsonElement("empref")]
         public string EmpRef { get; set; }
@@ -22,6 +22,5 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         public DateTime? FromDate { get; set; }
         [BsonElement("toDate")]
         public DateTime? ToDate { get; set; }
-        public int? HttpStatusCode { get; set; }
     }
 }

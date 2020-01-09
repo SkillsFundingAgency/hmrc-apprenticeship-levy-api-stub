@@ -2,6 +2,7 @@
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.EntityFrameworkCore;
@@ -47,11 +48,9 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             });
 
             services.AddTransient<IAuthenticate, AuthenticationService>();
-            services.AddScoped<AuthorisationFilter>();
             services.AddAuthentication(cfg =>
             {
-                cfg.DefaultScheme = BearerAuthenticationOptions.DefaultScheme;
-                cfg.DefaultChallengeScheme = BearerAuthenticationOptions.DefaultScheme;
+                cfg.DefaultAuthenticateScheme = BearerAuthenticationOptions.DefaultScheme;
             })
             .AddCustomAuth(o => { });
 

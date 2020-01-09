@@ -11,8 +11,6 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         [BsonElement("_id")]
         public ObjectId ObjectId { get; set; }
-        [BsonElement("id")]
-        public long Id { get; set; }
         [BsonElement("gatewayID")]
         public string GatewayId { get; set; }
         [BsonElement("accessToken")]

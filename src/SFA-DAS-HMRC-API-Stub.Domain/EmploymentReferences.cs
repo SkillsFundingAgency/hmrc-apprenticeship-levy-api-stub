@@ -11,7 +11,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        [BsonElement("id")]
+        [BsonElement("_id")]
         public string Id { get; set; }
         [BsonElement("_links")]
         public Links Links { get; set; }

@@ -83,7 +83,6 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
             {
                 new AuthRecord
                 {
-                    Id = 1,
                     AccessToken = "123456",
                     ClientId = "Test",
                     CreatedAt = DateTime.Now,

@@ -84,7 +84,7 @@ namespace SFA_DAS_HMRC_API_Stub
             }
 
             app.UseIdentityServer();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();

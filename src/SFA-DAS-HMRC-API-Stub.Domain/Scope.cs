@@ -10,6 +10,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
         public ObjectId _id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }

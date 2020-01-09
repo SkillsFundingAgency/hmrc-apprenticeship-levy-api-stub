@@ -7,7 +7,6 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
-    [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy")]
     [ApiController]
     public class FractionsController : ControllerBase
@@ -27,7 +26,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
             _logger = logger;
         }
 
-        //[TypeFilter(typeof(AuthorisationFilter))]
+        [TypeFilter(typeof(AuthorisationFilter))]
         [HttpGet]
         [Route("epaye/{empRef1}/{empRef2}/fractions")]
         public async Task<IActionResult> GetFractions(
