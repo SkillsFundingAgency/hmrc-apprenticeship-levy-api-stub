@@ -33,7 +33,9 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
                     ExpiresIn = token.Lifetime,
                     GatewayId = token.SubjectId,
                     IsPrivileged = false, //TODO: I don't know where this comes from
-                    Scope = token.Claims.First(c => c.Type == JwtClaimTypes.Scope).Value
+                    Scope = token.Claims.First(c => c.Type == JwtClaimTypes.Scope).Value,
+                    RefreshToken = TokenUtils.GenerateToken(),
+                    //RefreshedAt = null
                 }
             });
 

@@ -1,5 +1,7 @@
 ﻿using IdentityServer4.AccessTokenValidation;
+using IdentityServer4.Hosting;
 using IdentityServer4.Models;
+using IdentityServer4.ResponseHandling;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Validation;
@@ -20,6 +22,7 @@ using SFA.DAS.HMRC.API.Stub.Filters;
 using SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth;
 using SFA.DAS.HMRC.API.Stub.Services;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
@@ -98,6 +101,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             services.AddTransient<ICommand<InsertAuthCodeRequest, InsertAuthCodeResponse>, InsertAuthCodeCommand>();
             services.AddTransient<IQuery<GetAllScopesRequest, GetAllScopesResponse>, GetAllScopesQuery>();
             services.AddTransient<ICommand<InsertAuthRecordRequest, InsertAuthRecordResponse>, InsertAuthRecordCommand>();
+            services.AddTransient<IQuery<GetAuthRecordtByAccessTokenRequest, GetAuthRecordtByAccessTokenResponse>, GetAuthRecordtByAccessTokenQuery>();
             services.AddIdentityServer(o =>
             {
                 o.UserInteraction = new IdentityServer4.Configuration.UserInteractionOptions()
@@ -107,12 +111,18 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             })
                 .AddCustomAuthorizeRequestValidator<AuthValidator>()
                 .AddClientStore<ClientStore>()
-                .AddResourceStore<ResourceStore>()
+                .AddResourceStore<ResourceStore>()                     
+                //change urls to match old api
+                .Services.Where(service => service.ServiceType == typeof(Endpoint))
+                        .Select(item => (Endpoint)item.ImplementationInstance)
+                        .ToList()
+                        .ForEach(item => item.Path = item.Path.Value.Replace("/connect", "/oauth"))
             ;
 
             services.AddTransient<IAuthorizationCodeStore, AuthorizationCodeStore>();
             services.AddTransient<ITokenCreationService, TokenCreationService>();
-
+            services.AddTransient<ITokenResponseGenerator, Infrastructure.OAuth.TokenResponseGenerator>();
+            //services.AddTransient<IRefreshTokenService, RefreshTokenService>();
             return services;
         }
     }

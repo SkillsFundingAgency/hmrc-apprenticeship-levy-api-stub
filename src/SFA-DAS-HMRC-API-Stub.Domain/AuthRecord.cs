@@ -24,6 +24,7 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; }
         [BsonElement("refreshedAt")]
+        [BsonIgnoreIfDefault]
         public DateTime RefreshedAt { get; set; }
         [BsonElement("expiresIn")]
         public int ExpiresIn { get; set; }
