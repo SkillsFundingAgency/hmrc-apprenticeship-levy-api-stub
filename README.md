@@ -13,6 +13,13 @@ The App is a .Net Core 2.2 web application
 This is a port of an existing stub application that can be found here: https://github.com/UKGovernmentBEIS/das-alpha-hmrc-api-mock
 To maitain backwards compatibility the same mechanism of token generation has been used
 
+# API Documentation
+
+The API is documented with Swagger and the OAuth via a .wellknown endpoint
+
+* https://localhost:44360/index.html
+* https://localhost:44360/.well-known/openid-configuration
+
 # Authorization
 
 Authorization is by custom generated tokens that follow the OAuth2 Code flow.
