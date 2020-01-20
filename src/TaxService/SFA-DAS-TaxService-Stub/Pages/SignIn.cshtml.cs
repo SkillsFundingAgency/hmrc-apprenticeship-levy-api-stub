@@ -45,13 +45,13 @@ namespace SFA_DAS_TaxService_Stub.Pages
             {
                 ModelState.AddModelError("credentials_invalid", "Bad user name or password");
 
-                return Redirect($"SignIn?continue={ContinueUrl}&origin={Origin}");
+                return Redirect($"sign-in?continue={ContinueUrl}&origin={Origin}");
             }
 
-            if(result.Require2SV)
+            if (result.Require2SV)
             {
                 AddToSession(Constants.GATEWAYIDSESSIONKEY, login.UserId);
-                return Redirect($"AccessCode?continue={ContinueUrl}&origin={Origin}");
+                return Redirect($"access-code?continue={ContinueUrl}&origin={Origin}");
             }
             else
             {
