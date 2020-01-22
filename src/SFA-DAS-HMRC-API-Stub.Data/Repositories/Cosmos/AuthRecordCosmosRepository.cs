@@ -27,8 +27,10 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
                .ToList()
             ;
 
+            return query;
+
             // Can we push this into the query?
-            return query.Where(q => q.RefreshedAt.AddMilliseconds(q.ExpiresIn * 1000) >= DateTime.UtcNow);
+            //return query.Where(q => q.RefreshedAt.AddMilliseconds(q.ExpiresIn * 1000) >= DateTime.UtcNow);
         }
     }
 }

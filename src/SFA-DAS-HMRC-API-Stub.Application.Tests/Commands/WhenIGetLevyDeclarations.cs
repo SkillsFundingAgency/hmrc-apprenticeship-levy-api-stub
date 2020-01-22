@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
 using System.Threading.Tasks;
@@ -25,7 +25,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
             {
                new Declaration()
                {
-                   Id = id.ToString(),
+                   Id = id,
                    SubmissionTime = DateTime.Now,
                    LevyAllowanceForFullYear = 100,
                    LevyDueYTD = 1000,
@@ -37,7 +37,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                },
                new Declaration()
                {
-                   Id = (++id).ToString(),
+                   Id = ++id,
                    SubmissionTime = DateTime.Now.AddMonths(1),
                    LevyAllowanceForFullYear = 200,
                    LevyDueYTD = 2000,
@@ -59,7 +59,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Declarations = declarations
                 });
 
-            var sut = new GetLevyDeclarationCommand(levyDeclarationsRepository.Object);
+            var sut = new GetLevyDeclarationQuery(levyDeclarationsRepository.Object);
 
             // Act
             var result = await sut.Get(new GetLevyDeclarationRequest(empRef, fromDate, toDate));
@@ -99,7 +99,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                 .Setup(x => x.GetByEmpRef(empRef, fromDate, toDate))
                 .ReturnsAsync(default(LevyDeclaration));
 
-            var sut = new GetLevyDeclarationCommand(levyDeclarationsRepository.Object);
+            var sut = new GetLevyDeclarationQuery(levyDeclarationsRepository.Object);
             
             // Act
             var result = await sut.Get(new GetLevyDeclarationRequest(empRef, fromDate, toDate));

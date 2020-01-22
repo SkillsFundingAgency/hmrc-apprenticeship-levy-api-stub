@@ -1,0 +1,46 @@
+﻿@page "/gg/sign-in"
+@model SFA_DAS_TaxService_Stub.Pages.SignInModel
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<h1>SignIn</h1>
+
+@section InsideHeader {
+    <div class="header-proposition">
+        <div class="content">
+            <nav id="proposition-menu" class="header__menu" role="navigation">
+                <span class="header__menu__proposition-name">&nbsp</span>
+            </nav>
+        </div>
+    </div>
+}
+
+@section Content {
+    <div>
+        <article class="content__body">
+            <h1>Sign in</h1>
+            <p>Enter your Government Gateway credentials to sign in. You received these when you created your HMRC online account.</p>
+            <div class="alert">NOTE: This is a mockup of the HMRC Tax Platform - DO NOT ENTER LIVE GATEWAY CREDENTIALS!</div>
+            <form method="post">
+                <div id="errors" asp-validation-summary="ModelOnly">
+                </div>
+                <fieldset class="form-field-group">
+                    <input type="hidden" name="continue" value="@ViewData["ContUrl"]" />
+                    <input type="hidden" name="origin" value="@ViewData["Origin"]" />
+                    <div class="form-field">
+                        <label class="label--inline" for="userId">User ID</label>
+                        <input type="text" id="userId" name="Login.UserId" required />
+                    </div>
+                    <div class="form-field">
+                        <label class="label--inline" for="password">Password</label>
+                        <input type="password" id="password" required name="Login.Password" />
+                    </div>
+                    <div class="form-field">
+                        <input class="button" type="submit" value="Sign in" />
+                    </div>
+                </fieldset>
+            </form>
+        </article>
+    </div>
+}

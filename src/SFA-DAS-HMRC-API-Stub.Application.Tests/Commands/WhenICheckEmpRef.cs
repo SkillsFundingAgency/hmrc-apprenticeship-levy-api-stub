@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Repositories;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
@@ -63,7 +63,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     Employer = employer
                 });
 
-            var sut = new GetEmployerReferenceCommand(employerReferenceRepository.Object);
+            var sut = new GetEmployerReferenceQuery(employerReferenceRepository.Object);
             
             // Act
             var result = await sut.Get(new GetEmployerReferenceRequest(empRef));
@@ -95,7 +95,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                 .Setup(x => x.GetEmployerReference(empRef))
                 .ReturnsAsync(default(EmployerReference));
 
-            var sut = new GetEmployerReferenceCommand(employerReferenceRepository.Object);
+            var sut = new GetEmployerReferenceQuery(employerReferenceRepository.Object);
             
             // Act
             var result = await sut.Get(new GetEmployerReferenceRequest(empRef));

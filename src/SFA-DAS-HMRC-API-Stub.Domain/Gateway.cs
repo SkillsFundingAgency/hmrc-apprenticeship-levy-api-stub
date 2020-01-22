@@ -1,24 +1,22 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace SFA.DAS.HMRC.API.Stub.Domain
 {
     public class GatewayUser
     {
-        [JsonProperty(PropertyName = "id")]
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        [BsonElement("_id")]
         public string Id { get; set; }
-        [JsonProperty(PropertyName = "empref")]
+        [BsonElement("empref")]
         public string EmpRef { get; set; }
-        [JsonProperty(PropertyName = "name")]
+        [BsonElement("name")]
         public string Name { get; set; }
-        [JsonProperty(PropertyName = "requires2SV")]
+        [BsonElement("require2SV")]
         public bool Require2SV { get; set; }
-        [JsonProperty(PropertyName = "password")]
+        [BsonElement("password")]
         public string Password { get; set; }
-        [JsonProperty(PropertyName = "gatewayID")]
+        [BsonElement("gatewayID")]
         public string GatewayId { get; set; }
     }
 }

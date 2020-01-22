@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -6,9 +7,12 @@ namespace SFA.DAS.HMRC.API.Stub.Domain
 {
     public class FractionCalculationDate
     {
-        [JsonProperty(PropertyName = "id")]
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        [BsonElement("_id")]
+        [JsonIgnore]
         public string Id { get; set; }
-        [JsonProperty(PropertyName = "lastcalculationdate")]
+        [BsonElement("lastCalculationDate")]
         public DateTime LastCalculationDate { get; set; }
     }
 }

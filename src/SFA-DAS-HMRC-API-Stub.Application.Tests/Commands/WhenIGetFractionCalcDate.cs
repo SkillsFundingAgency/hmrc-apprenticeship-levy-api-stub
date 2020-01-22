@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Repositories;
 using System;
 using SFA.DAS.HMRC.API.Stub.Domain;
@@ -31,7 +31,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                     LastCalculationDate = fractionCalcDate
                 });
 
-            var sut = new GetFractionCalcDateCommand(fractionsCalcDateRepository.Object);
+            var sut = new GetFractionCalcDateQuery(fractionsCalcDateRepository.Object);
             
             // Act
             var result = await sut.Get(new GetFractionCalcDateRequest());
@@ -50,7 +50,7 @@ namespace SFA.DAS.HMRC.API.Stub.Application.Tests
                 .Setup(x => x.GetLastCalcDate())
                 .ReturnsAsync(default(FractionCalculationDate));
 
-            var sut = new GetFractionCalcDateCommand(fractionsCalcDateRepository.Object);
+            var sut = new GetFractionCalcDateQuery(fractionsCalcDateRepository.Object);
             
             // Act
             var result = await sut.Get(new GetFractionCalcDateRequest());

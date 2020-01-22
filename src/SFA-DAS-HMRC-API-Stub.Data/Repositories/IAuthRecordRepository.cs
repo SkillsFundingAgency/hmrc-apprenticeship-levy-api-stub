@@ -9,5 +9,6 @@ namespace SFA.DAS.HMRC.API.Stub.Data.Repositories
     public interface IAuthRecordRepository
     {
         Task<IEnumerable<AuthRecord>> GetAuthRecords(string token);
+        Task Insert(AuthRecord authRecord);
     }
 }

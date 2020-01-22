@@ -40,6 +40,11 @@ namespace SFA.DAS.HMRC.API.Stub.Filters
             _authService = authService;
         }
 
+        protected override Task HandleChallengeAsync(AuthenticationProperties properties)
+        {
+            return base.HandleChallengeAsync(properties);
+        }
+
         /// <summary>
         /// Handles authentication on incoming requests by checking the authorization header for a valid bearer token.
         /// Where no token exists or it is invalid an Unauthorized response is returned

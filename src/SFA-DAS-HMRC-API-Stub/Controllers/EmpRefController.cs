@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Filters;
 
 namespace SFA_DAS_HMRC_API_Stub.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = "Bearer")]
     [TypeFilter(typeof(AuthorisationFilter))]
     [Route("apprenticeship-levy/epaye")]
     [ApiController]
     public class EmpRefController : ControllerBase
     {
-        private readonly ICommand<GetEmployerReferenceRequest, GetEmployerrReferenceResponse> _getEmployerReference;
+        private readonly IQuery<GetEmployerReferenceRequest, GetEmployerrReferenceResponse> _getEmployerReference;
         private readonly ILogger<EmpRefController> _logger;
 
         public EmpRefController(
-            ICommand<GetEmployerReferenceRequest, GetEmployerrReferenceResponse> getEmployerReference,
+            IQuery<GetEmployerReferenceRequest, GetEmployerrReferenceResponse> getEmployerReference,
             ILogger<EmpRefController> logger)
         {
             _getEmployerReference = getEmployerReference;
@@ -35,7 +36,7 @@ namespace SFA_DAS_HMRC_API_Stub.Controllers
         {
             _logger.LogDebug("Start GetEmploymentRef action");
 
-            var result = await _getEmployerReference.Get(new GetEmployerReferenceRequest($"{empRef1}/{empRef2}")); // Exception here
+            var result = await _getEmployerReference.Get(new GetEmployerReferenceRequest($"{empRef1}/{empRef2}"));
 
             _logger.LogDebug("End GetEmploymentRef action");
 

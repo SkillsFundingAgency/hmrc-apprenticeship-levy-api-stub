@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.HMRC.API.Stub.Commands;
+using MongoDB.Driver;
+using SFA.DAS.HMRC.API.Stub.Application.Queries;
 using SFA.DAS.HMRC.API.Stub.Data.Repositories;
-using SFA.DAS.HMRC.API.Stub.Data.Repositories.Cosmos;
+using SFA.DAS.HMRC.API.Stub.Data.Repositories.Mongo;
 
 namespace SFA.DAS.HMRC.API.Stub.Configuration
 {
@@ -14,14 +15,15 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
         {
             services.AddTransient<GetFractionsRequest>();
             services.AddTransient<GetFractionsResponse>();
-            services.AddTransient<ICommand<GetFractionsRequest, GetFractionsResponse>, GetFractionsCommand>();
-            services.AddTransient<IFractionsRepository, FractionsCosmosRepository>(o =>
-            {
-                var client = o.GetRequiredService<DocumentClient>();
-                var logger = o.GetRequiredService<ILogger<FractionsCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.FRACTIONS);
+            services.AddTransient<IQuery<GetFractionsRequest, GetFractionsResponse>, GetFractionsQuery>();
 
-                return new FractionsCosmosRepository(client, logger, collectionUri);
+            services.AddTransient<IFractionsRepository, FractionsRepository>(o =>
+            {
+                var client = o.GetRequiredService<MongoClient>();
+                var logger = o.GetRequiredService<ILogger<FractionsRepository>>();
+                var database = client.GetDatabase(config.GetValue<string>("mongoValues:databaseName"));
+
+                return new FractionsRepository(database, logger);
             });
 
             return services;
@@ -31,15 +33,15 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
         {
             services.AddTransient<GetFractionCalcDateRequest>();
             services.AddTransient<GetFractionCalcDateResponse>();
-            services.AddTransient<ICommand<GetFractionCalcDateRequest, GetFractionCalcDateResponse>, GetFractionCalcDateCommand>();
+            services.AddTransient<IQuery<GetFractionCalcDateRequest, GetFractionCalcDateResponse>, GetFractionCalcDateQuery>();
 
-            services.AddTransient<IFractionsCalcDateRepository, FractionsCosmosRepository>(o =>
+            services.AddTransient<IFractionsCalcDateRepository, FractionsRepository>(o =>
             {
-                var client = o.GetRequiredService<DocumentClient>();
-                var logger = o.GetRequiredService<ILogger<FractionsCosmosRepository>>();
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(config.GetValue<string>("cosmosValues:databaseName"), Constants.FRACTIONCALCDATE);
+                var client = o.GetRequiredService<MongoClient>();
+                var logger = o.GetRequiredService<ILogger<FractionsRepository>>();
+                var database = client.GetDatabase(config.GetValue<string>("mongoValues:databaseName"));
 
-                return new FractionsCosmosRepository(client, logger, collectionUri);
+                return new FractionsRepository(database, logger);
             });
 
             return services;
