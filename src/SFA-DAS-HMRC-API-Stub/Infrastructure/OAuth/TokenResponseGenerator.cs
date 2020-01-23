@@ -98,41 +98,7 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
                 Scope = string.Join(" ", request.ValidatedRequest.AuthorizationCode.RequestedScopes),
                 RefreshToken = refreshToken
             };
-
-            
-            //////////////////////////
-            // id token
-            /////////////////////////
-            //if (request.ValidatedRequest.AuthorizationCode.IsOpenId)
-            //{
-            //    // load the client that belongs to the authorization code
-            //    Client client = null;
-            //    if (request.ValidatedRequest.AuthorizationCode.ClientId != null)
-            //    {
-            //        client = await Clients.FindEnabledClientByIdAsync(request.ValidatedRequest.AuthorizationCode.ClientId);
-            //    }
-            //    if (client == null)
-            //    {
-            //        throw new InvalidOperationException("Client does not exist anymore.");
-            //    }
-
-            //    var resources = await Resources.FindEnabledResourcesByScopeAsync(request.ValidatedRequest.AuthorizationCode.RequestedScopes);
-
-            //    var tokenRequest = new TokenCreationRequest
-            //    {
-            //        Subject = request.ValidatedRequest.AuthorizationCode.Subject,
-            //        Resources = resources,
-            //        Nonce = request.ValidatedRequest.AuthorizationCode.Nonce,
-            //        AccessTokenToHash = response.AccessToken,
-            //        StateHash = request.ValidatedRequest.AuthorizationCode.StateHash,
-            //        ValidatedRequest = request.ValidatedRequest
-            //    };
-
-            //    var idToken = await TokenService.CreateIdentityTokenAsync(tokenRequest);
-            //    var jwt = await TokenService.CreateSecurityTokenAsync(idToken);
-            //    response.IdentityToken = jwt;
-            //}
-
+                      
             return response;
         }
 
@@ -166,10 +132,7 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
             }
 
             var at = await TokenService.CreateAccessTokenAsync(tokenRequest);
-            var accessToken = await TokenService.CreateSecurityTokenAsync(at);
-
-
-            //var refreshToken = await RefreshTokenService.CreateRefreshTokenAsync(tokenRequest.Subject, at, request.Client);
+            var accessToken = await TokenService.CreateSecurityTokenAsync(at);            
             
             var record = await AuthRecordQuery.Get(new GetAuthRecordtByAccessTokenRequest
             {

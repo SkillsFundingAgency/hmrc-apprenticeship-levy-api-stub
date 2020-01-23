@@ -123,8 +123,7 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
 
             services.AddTransient<IAuthorizationCodeStore, AuthorizationCodeStore>();
             services.AddTransient<ITokenCreationService, TokenCreationService>();
-            services.AddTransient<ITokenResponseGenerator, Infrastructure.OAuth.TokenResponseGenerator>();
-            services.AddTransient<IRefreshTokenService, RefreshTokenService>();
+            services.AddTransient<ITokenResponseGenerator, Infrastructure.OAuth.TokenResponseGenerator>();            
             services.AddTransient<ITokenValidator, TokenValidator>();
             return services;
         }
