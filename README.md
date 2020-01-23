@@ -51,6 +51,18 @@ grant_type:authorization_code
 
 The call to this endpoint will return an access token that can then be used to authenticate against the SFA-DAS-HMRC-API-Stub project endpoints
 
+Refresh token can be obtained by making POST request to 
+<code>
+https://localhost:44360/oauth/token
+</code>
+
+<code>
+refresh_token:xxxxxxxxxxxxxxxx
+client_id:xxxxxxxxxxxxxxxxxxx
+client_secret:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+grant_type:refresh_token
+</code>
+
 # Database Setup
 
 The current implementation uses the existing mlab mongodb database

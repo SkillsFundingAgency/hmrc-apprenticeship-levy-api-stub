@@ -102,7 +102,9 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             services.AddTransient<IQuery<GetAllScopesRequest, GetAllScopesResponse>, GetAllScopesQuery>();
             services.AddTransient<ICommand<InsertAuthRecordRequest, InsertAuthRecordResponse>, InsertAuthRecordCommand>();
             services.AddTransient<IQuery<GetAuthRecordtByAccessTokenRequest, GetAuthRecordtByAccessTokenResponse>, GetAuthRecordtByAccessTokenQuery>();
-            services.AddIdentityServer(o =>
+            services.AddTransient<IQuery<GetAuthRecordtByRefreshTokenRequest, GetAuthRecordtByRefreshTokenResponse>, GetAuthRecordtByRefreshTokenQuery>();
+            services.AddTransient<ICommand<UpdateAuthRecordRequest, UpdateAuthRecordResponse>, UpdateAuthRecordCommand>();
+               services.AddIdentityServer(o =>
             {
                 o.UserInteraction = new IdentityServer4.Configuration.UserInteractionOptions()
                 {
@@ -122,7 +124,8 @@ namespace SFA.DAS.HMRC.API.Stub.Configuration
             services.AddTransient<IAuthorizationCodeStore, AuthorizationCodeStore>();
             services.AddTransient<ITokenCreationService, TokenCreationService>();
             services.AddTransient<ITokenResponseGenerator, Infrastructure.OAuth.TokenResponseGenerator>();
-            //services.AddTransient<IRefreshTokenService, RefreshTokenService>();
+            services.AddTransient<IRefreshTokenService, RefreshTokenService>();
+            services.AddTransient<ITokenValidator, TokenValidator>();
             return services;
         }
     }

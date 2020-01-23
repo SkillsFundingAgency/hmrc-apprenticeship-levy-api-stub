@@ -31,10 +31,11 @@ namespace SFA.DAS.HMRC.API.Stub.Infrastructure.OAuth
                 ClientId = query.Application.ClientID,
                 ClientSecrets = { new Secret(query.Application.ClientSecret.Sha512()) },
                 AllowedScopes = { _scope },
-                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials, 
                 Enabled = true,
                 RedirectUris = { _redirectUrls },
-                AccessTokenType = AccessTokenType.Jwt
+                AccessTokenType = AccessTokenType.Jwt,
+                AllowOfflineAccess = true
             };
         }
     }
